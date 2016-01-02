@@ -5,7 +5,8 @@ ul,ol{list-style:none;}
 input,select,textarea{outline:none;border:none;background:none;}
 input{background-color:#FFFFFF;}
 textarea{resize:none;}
-a{text-decoration:none;}
+/*a{text-decoration:none; color:#FFFFFF}
+a:hover{color: red;}*/
 /*清除浮动*/
 .clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; } 
 .clearfix { *zoom:1;clear: both; } 
