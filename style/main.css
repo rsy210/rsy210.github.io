@@ -1,0 +1,38 @@
+.container{
+	width: 80%;
+	margin:0 auto;
+}
+
+
+header{
+	background: #E3E7EA;
+}
+.logo #logoTitle{
+	display: inline-block;
+	height: 70px;
+	width: auto;
+	font-size: 36px;
+	font-weight: 700;
+	line-height: 70px;
+	text-align: center;
+	text-decoration: none;
+	color: #666666;
+}
+
+.main{
+	padding-top: 50px;
+}
+.catalogue .catalogue-list .list{
+	font-size: 30px;
+	font-weight: 500;
+	height: 80px;
+	line-height: 60px;
+	text-indent: 120px;
+	margin:0 auto;
+	padding-left: 10px;
+}
+.catalogue .catalogue-list .list:hover{
+	background: #DAECF6;
+	text-indent: 0px;
+
+};
