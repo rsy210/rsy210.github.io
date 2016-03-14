@@ -34,5 +34,6 @@ header{
 .catalogue .catalogue-list .list:hover{
 	background: #DAECF6;
 	text-indent: 0px;
-
+	cursor: pointer;
+	cursor: pointer;
 };
