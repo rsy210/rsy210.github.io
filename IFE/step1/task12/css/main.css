@@ -1,0 +1,128 @@
+body,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,p,input{margin: 0; padding: 0;}
+html,body{font:normal 100% Times, "Microsoft YaHei", Arial, Helvetica, Georgia, 'New York', serif;height:100%;font-weight: normal;}
+input{outline:none;}
+ul,ol{list-style:none;border:none;}
+
+/*input,select,textarea{outline:none;border:none;background:none;}*/
+/*input{background-color:#FFFFFF;}*/
+/*清除浮动*/
+.clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; } 
+.clearfix { *zoom:1;clear: both; } 
+
+span,a{
+	display: inline-block;
+	word-wrap: break-word;
+	color: inherit;
+	line-height: 1.5;
+	text-indent: 0.1em;
+	text-decoration: none;
+}
+.eg1{
+	width: 20em;
+	padding: 2em;
+}
+#title span{
+	background: #000;
+	color: #fff;
+}
+.rank{
+	width: 12%;
+}
+.site{
+	width: 61.5%;
+}
+.hot{
+	width: 24%;
+}
+.eg1 li:nth-child(even) a,.eg1 li:nth-child(even) span{
+	background: #C4C4C4;
+}
+.eg1 li:first-child,.eg1 li:nth-child(2),.eg1 li:nth-child(3){
+	color: red;
+}
+
+.eg2,.eg3{
+	margin: 2em 5em;
+}
+
+input{
+	width: 11em;
+	transition:width 2s transform 2s;
+	-moz-transition: width 2s transform 2s;	/* Firefox 4 */
+	-webkit-transition: width 2s transform 2s;	/* Safari 和 Chrome */
+	-o-transition: width 2s transform 2s;
+}
+input:focus{
+	width: 20em;
+	border: 2px solid #79ABE8;
+	transform: translate(-50px,0);
+	-ms-transform: translate(-50px,0);		/* IE 9 */
+	-webkit-transform: translate(-50px,0);	/* Safari and Chrome */
+	-o-transform: translate(-50px,0);		/* Opera */
+	-moz-transform: translate(-50px,0);	
+}
+.cant{
+	width: 15em;
+	position: relative;
+}
+.content{
+	width: 15em;
+	overflow: hidden;	
+}
+.eg3 ul.cont{
+	position: relative;
+	width: 45em;
+	height: 10em;
+	transition: left 0.1s;
+}
+.eg3 ul.cont li{
+	
+	float: left;
+	width: 15em;
+	height: 10em;
+
+}
+#img1{
+	background: red;
+	left: 0;
+}
+#img2{
+	background: blue;
+	left: 15em;
+}
+#img3{
+	background: green;
+	left: 30em;
+}
+
+
+
+.eg3 .tag{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	z-index: 100;
+}
+.eg3 .tag li{
+	float: left;
+}
+.eg3 .tag li a:active{
+	background: rgba(0,0,0,0.4);
+}
+.eg3 .tag li a{
+	width: 1.5em;
+	height: 1.5em;
+	text-align: center;
+	color: #fff;
+	background: rgba(255,255,255,0.4);
+}
+
+#s1:target~.cont{
+	left: 0;
+}
+#s2:target~.cont{
+	left: -100%;
+}
+#s3:target~.cont{
+	left: -200%;
+}

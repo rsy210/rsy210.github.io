@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>完全css-tab切换</title> 
+<style> 
+<!-- 
+*{ 
+margin:0;padding:0;list-style:none;font-size:12px;} 
+
+.eg3{ 
+width:300px;margin:10px auto;position:relative;border:1px solid #666;} 
+
+ul.tag{ 
+width:20px;height:100px;position:absolute;right:5px;top:100px;} 
+
+ul.tag li{height:33px;} 
+
+ul.tag li a{ 
+display:block;width:20px;height:20px;line-height:20px;text-align:center;color:#000;background:#ccc;text-decoration:none;} 
+
+ul.tag li a:hover{color:#fff;background:#666;} 
+
+.cont{height:300px;overflow:hidden;} 
+
+#img1,#img2,#img3{width:300px;height:300px;} 
+--> 
+</style> 
+</head> 
+<body> 
+  <div>
+    <div>wejferg</div>
+    <div>wejferg</div>
+    <div>wejferg</div>
+    <div>wejferg</div>
+  </div>
+<div class="eg3">
+      <ul class="tag clearfix">
+        <li><a href="#img1">1</a></li>
+        <li><a href="#img2">2</a></li>
+        <li><a href="#img3">3</a></li>
+      </ul>
+      <ul class="cont clearfix">
+        <li id="img1"></li>
+        <li id="img2"></li>
+        <li id="img3"></li>
+      </ul>
+      
+    </div>
+</body> 
+</html>

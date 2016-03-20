@@ -1,0 +1,183 @@
+body,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,p,input,select,textarea,form,button,figure{margin: 0; padding: 0;}
+html,body{font:normal 100% "Microsoft YaHei", Arial, Helvetica, Georgia, 'New York', serif;height:100%;font-weight: normal;}
+button,img,button{border:none;}
+ul{list-style:none;margin:0px;padding:0px;border:none;}
+/*input,select,textarea{outline:none;border:none;background:none;}*/
+/*input{background-color:#FFFFFF;}*/
+textarea{resize:none;}
+/*清除浮动*/
+.clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; } 
+.clearfix { *zoom:1;clear: both; } 
+
+body{
+	background: #DEDEDE;
+	min-width: 800px;
+}
+
+header{
+	width: 100%;height: 3.6em;
+	background: #333333;
+	
+}
+header a#logo{
+	display: inline-block;
+	margin-left: 2.2em;
+}
+header a#logo img{
+	padding: 0.25em 0 0;
+}
+header #nav{
+	height: 100%;
+	margin-right: 1em;
+	float: right;
+}
+header #nav ul{
+	height: 100%;
+}
+header #nav ul li{
+	height: 100%;
+	display: inline-block;
+}
+header #nav ul li a{
+	height: 100%;
+	font-size: 0.8em;
+	line-height: 5;
+	padding: 0 0.3em;
+
+	display: inline-block;
+	text-decoration:none;
+}
+header #nav ul li a:link{
+	color: #fff;
+}
+header #nav ul li a:visited{
+	color: #A9B0B8;
+}
+header #nav ul li a:hover{
+	text-decoration: underline;
+	color: #E10602;
+}
+
+article{
+	margin-right: 25em;
+}
+section{
+	margin:1.5em;
+	background: #fff;
+	padding: 2.5em 1.5em;
+	border: 1px solid #CDCDCD;
+	box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+section h2{
+	line-height: 2;
+}
+section h4{
+	line-height: 2;
+	color: #68686A;
+}
+.title_abs{
+	font-size: 0.8em;
+	font-weight: bold;
+	color: #76726F;
+	line-height: 3;
+}
+section > p{
+	line-height: 1.8;
+	text-indent: 2em;
+}
+.img{
+	margin: 1em 0;
+}
+figure{
+	width: 7em;
+	height: 8em;
+	float: left;
+	margin: 1em 1em 0;
+	box-sizing:border-box;
+	text-align: center;
+	border: 1px solid #CBCBCB;
+}
+figure p{
+	line-height: 2;
+}
+figure img{
+	width: 5em;
+	height: 5em;
+}
+ol{
+	margin:0 0 1em 3em;
+}
+table{
+	width: 100%;
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+}
+table th{
+	background: #333333;
+	color: #fff;
+	text-align: left;
+	text-indent: 0.2em;
+}
+table tr td{
+	border: 1px solid #ccc;
+	text-indent: 0.5em;
+}
+table tr:last-child{
+	font-weight: 600;
+	background: #CCCCCC;
+}
+aside{
+	float: right;
+	width: 21em;
+	margin:1.5em 1em 0;
+	background: #fff;
+	padding: 1.5em;
+	border: 1px solid #CDCDCD;
+	box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+}
+aside h4{
+	line-height: 2.5;
+	padding-left: 0.8em;
+	border-left: 3px solid #CDCDCD;
+}
+aside form{
+	padding: 0.8em 1em;
+}
+label{
+	font-size: 0.9em;
+}
+form p{
+	font-size: 0.8em;
+	padding: 0.6em 0;
+}
+form p label:first-child{
+	display: inline-block;
+	width: 28%;
+	padding-right: 3%;
+	text-align: right;
+}
+.prom{
+	margin-left: 32%;
+	display: inline-block;
+	padding: 0.6em 0 0.8em;
+}
+textarea{
+	height: 7em; 
+}
+.submit{
+	width: 100%;
+	font-size: 1.2em;
+	height: 2em;
+	color: #fff;
+	background: #3059CF;
+	border-radius: 0.8em;
+}
+footer{
+	width: 100%;
+	background: #000;
+	color: #fff;
+	height: 4em;
+	padding-top: 1em;
+	text-align: center;
+}
