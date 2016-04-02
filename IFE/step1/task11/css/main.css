@@ -41,8 +41,8 @@ header a{
   position: absolute;
   left: 0.5rem;
   color: #fff;
-  line-height: 2.3;
-  font-size: 2rem;
+  line-height: 3;
+  font-size: 1.5rem;
 }
 header h1{
   line-height: 2.3;
@@ -54,6 +54,10 @@ nav{
   background: #fff;
 }
 nav ul{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -o-box;
+  display: -ms-flexbox;
   display: flex;
   display: -webkit-flex;
   justify-content:space-around;
