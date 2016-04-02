@@ -89,13 +89,14 @@ ul.tags{
   padding-bottom: 3.2rem;
 }
 ul.tags li{
+  width: 18.8%;
 }
 ul.tags li img{
   width: 100%;
 }
 ul.tags li span{
   display: block;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #333;
   text-align: center;
 }
@@ -115,7 +116,7 @@ div.land{
   margin: 0 auto;
 }
 .land ul li{
-  width: 33.333333%;
+  width: 31.685%;
   margin: 2.5rem 0;
   text-align: center;
 
@@ -156,6 +157,7 @@ div.land{
   width:94%; 
   margin: 0 auto;
   padding-top: 2.2rem;
+  display: -webkit-box;
   display: flex;
   display: -webkit-flex;
   justify-content:space-between;
@@ -173,6 +175,7 @@ div.land{
 }
 .text{
   width: 68%;
+  display: -webkit-box;
   display: flex;
   display: -webkit-flex;
   justify-content:space-between;
@@ -184,10 +187,10 @@ div.land{
   display: inline-block;
   width: 48%;
   background: #F8F8F8;
-  font-size: 1rem;
+  font-size: 3rem;
   color: #484848;
   text-align: center;
-  line-height: 2;
+  line-height: 3.1;
   margin-bottom: 1rem;
 }
 article{
