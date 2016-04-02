@@ -58,8 +58,8 @@ nav ul{
   display: -moz-box;
   display: -o-box;
   display: -ms-flexbox;
-  display: flex;
   display: -webkit-flex;
+  display: flex;
   justify-content:space-around;
   -webkit-justify-content:space-around;
   flex-flow:row nowrap;
