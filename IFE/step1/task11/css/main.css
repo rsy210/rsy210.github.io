@@ -209,7 +209,7 @@ section div.title,section div.title1{
 section div.title img{
   width: 34%;
   float: left;
-  margin-right: 1rem;
+  margin-right: 1%;
 }
 section div.art_des{
   height: 100%;
@@ -223,7 +223,7 @@ section div.title span{
   color: #ccc;
   font-size: 1rem;
   position: absolute;
-  left: 34%+1rem;
+  left: 35%;
   bottom: 0;
 }
 
