@@ -207,11 +207,14 @@ section div.title,section div.title1{
   position: relative;
 }
 section div.title img{
-  width: 30%;
+  width: 34%;
   float: left;
-  margin-right: 2rem;
+  margin-right: 1rem;
 }
-section h1{
+section div.art_des{
+  height: 100%;
+}
+section  h1{
   font-size: 1.5rem;
   font-weight: normal;
   color: #666;
@@ -220,6 +223,7 @@ section div.title span{
   color: #ccc;
   font-size: 1rem;
   position: absolute;
+  left: 34%+1rem;
   bottom: 0;
 }
 
