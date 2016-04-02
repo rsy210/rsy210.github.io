@@ -58,6 +58,8 @@ nav ul{
   display: -webkit-flex;
   justify-content:space-around;
   -webkit-justify-content:space-around;
+  flex-flow:row nowrap;
+  -webkit-flex-flow:row nowrap;
 }
 nav ul li{
   width: 20%;
@@ -82,6 +84,8 @@ ul.tags{
   display: -webkit-flex;
   justify-content:space-around;
   -webkit-justify-content:space-around;
+  flex-flow:row nowrap;
+  -webkit-flex-flow:row nowrap;
   padding-bottom: 3.2rem;
 }
 ul.tags li{
@@ -104,6 +108,8 @@ div.land{
   display: -webkit-flex;
   justify-content:space-around;
   -webkit-justify-content:space-around;
+  flex-flow:row nowrap;
+  -webkit-flex-flow:row nowrap;
   align-items:flex-end;
   border-top:3px solid #eee; 
   margin: 0 auto;
@@ -154,6 +160,8 @@ div.land{
   display: -webkit-flex;
   justify-content:space-between;
   -webkit-justify-content:space-between;
+  flex-flow:row wrap;
+  -webkit-flex-flow:row wrap;
 }
 .waimg {
   width: 30%;
@@ -170,6 +178,7 @@ div.land{
   justify-content:space-between;
   -webkit-justify-content:space-between;
   flex-flow:row wrap;
+  -webkit-flex-flow:row wrap;
 }
 .text span{
   display: inline-block;
@@ -217,7 +226,8 @@ section:last-child ul.art_img{
   display: -webkit-flex;
   justify-content:space-between;
   -webkit-justify-content:space-between;
-  flex-flow:row wrap;
+  flex-flow:row nowrap;
+  -webkit-flex-flow:row nowrap;
 }
 section:last-child ul.art_img li{
   width: 32%;
