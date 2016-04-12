@@ -89,7 +89,7 @@ window.onload = function(){
 	var chipW = 200, chipH = 200;
 	
 	var img=new Image();
-	img.src="./img/spritesheet.png";
+	img.src="./img/img.png";
 	var chip1X = betX + 15 - betR, chip1Y = canH/2 + betR + 10;
 	var chip2X = betX + 15, chip2Y = chip1Y;
 	var chip3X = chip1X, chip3Y = canH/2 + betR + 20 + canW/32;
@@ -206,7 +206,9 @@ window.onload = function(){
 					dealFlag = false;
 					pCount.player = 0;
 					pCount.banker = 0;
-					hasANum = 0;
+					hasANum.bker = 0;
+					hasANum.pyer = 0;
+					hitNum = 0;
 					gameM.time++;
 					moneyText();
 				}
@@ -221,7 +223,8 @@ window.onload = function(){
 					dealFlag = false;
 					pCount.player = 0;
 					pCount.banker = 0;
-					hasANum = 0;
+					hasANum.bker = 0;
+					hasANum.pyer = 0;
 					gameM.re += 2*gameM.bet;
 					gameM.time++;
 					moneyText();
@@ -237,7 +240,8 @@ window.onload = function(){
 					dealFlag = false;
 					pCount.player = 0;
 					pCount.banker = 0;
-					hasANum = 0;
+					hasANum.bker = 0;
+					hasANum.pyer = 0;
 					gameM.re += gameM.bet;
 					gameM.time++;
 					moneyText();
@@ -256,7 +260,8 @@ window.onload = function(){
 					dealFlag = false;
 					pCount.player = 0;
 					pCount.banker = 0;
-					hasANum = 0;
+					hasANum.bker = 0;
+					hasANum.pyer = 0;
 					gameM.time++;
 					moneyText();
 				}
@@ -285,7 +290,8 @@ window.onload = function(){
 						dealFlag = false;
 						pCount.player = 0;
 						pCount.banker = 0;
-						hasANum = 0;
+						hasANum.bker = 0;
+						hasANum.pyer = 0;
 						gameM.re += 2*gameM.bet;
 						gameM.time++;
 						moneyText();
@@ -303,7 +309,8 @@ window.onload = function(){
 						dealFlag = false;
 						pCount.player = 0;
 						pCount.banker = 0;
-						hasANum = 0;
+						hasANum.bker = 0;
+						hasANum.pyer = 0;
 						gameM.re += gameM.bet;
 						gameM.time++;
 						moneyText();
@@ -321,7 +328,8 @@ window.onload = function(){
 						dealFlag = false;
 						pCount.player = 0;
 						pCount.banker = 0;
-						hasANum = 0;
+						hasANum.bker = 0;
+						hasANum.pyer = 0;
 						gameM.time++;
 						moneyText();
 						return;
@@ -339,7 +347,8 @@ window.onload = function(){
 						dealFlag = false;
 						pCount.player = 0;
 						pCount.banker = 0;
-						hasANum = 0;
+						hasANum.bker = 0;
+						hasANum.pyer = 0;
 						gameM.time++;
 						moneyText();
 						return;
@@ -439,7 +448,8 @@ window.onload = function(){
 			dealFlag = false;
 			pCount.player = 0;
 			pCount.banker = 0;
-			hasANum = 0;
+			hasANum.bker = 0;
+			hasANum.pyer = 0;
 			gameM.re += 2*gameM.bet;
 			gameM.time++;
 			moneyText();
@@ -458,7 +468,8 @@ window.onload = function(){
 			dealFlag = false;
 			pCount.player = 0;
 			pCount.banker = 0;
-			hasANum = 0;
+			hasANum.bker = 0;
+			hasANum.pyer = 0;
 			gameM.time++;
 			moneyText();
 			return;
