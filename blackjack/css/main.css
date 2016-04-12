@@ -1,0 +1,25 @@
+body,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,p,input,select,textarea,form,button,figure{margin: 0; padding: 0;}
+html,body{font:normal 100% "Microsoft YaHei", Arial, Helvetica, Georgia, 'New York', serif;height:100%;font-weight: normal;}
+button,img,button{border:none;}
+ul{list-style:none;margin:0px;padding:0px;border:none;}
+/*input,select,textarea{outline:none;border:none;background:none;}*/
+/*input{background-color:#FFFFFF;}*/
+textarea{resize:none;}
+/*清除浮动*/
+.clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; } 
+.clearfix { *zoom:1;clear: both; } 
+
+
+
+
+.single_game_bt, .mul_game_bt{
+	cursor: pointer;
+}
+#game_container,#canvas_single,#canvas_mul{
+	display: none;
+}
+
+/* 单机对战 */
+#canvas_single{
+	background: #000;
+}
