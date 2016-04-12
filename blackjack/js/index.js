@@ -142,7 +142,7 @@ window.onload = function(){
 			if(gameM.re<=0){alert("钱不够喽");return;}
 			cxt_sgl.drawImage(img, 1247,   5, chipW, chipH, putChipX -2*chipCN.C1, putChipY - 3*chipCN.C1, chipDrW, chipDrH);
 			chipCN.C1++;
-			gameM.re--;
+			//gameM.re--;
 			gameM.bet++;
 			moneyText();
 		}
@@ -151,7 +151,7 @@ window.onload = function(){
 			var putChipX = betX, putChipY = canH/2 - chipDrW;
 			cxt_sgl.drawImage(img, 1247, 215, chipW, chipH, putChipX -2*chipCN.C2, putChipY - 2*chipCN.C2, chipDrW, chipDrH);
 			chipCN.C2++;
-			gameM.re -=10;
+			//gameM.re -=10;
 			gameM.bet += 10;
 			moneyText();
 		}
@@ -160,7 +160,6 @@ window.onload = function(){
 			var putChipX = betX - chipDrW, putChipY = canH/2;
 			cxt_sgl.drawImage(img, 1247, 425, chipW, chipH, putChipX -2*chipCN.C3, putChipY - 2*chipCN.C3, chipDrW, chipDrH);
 			chipCN.C3++;
-			gameM.re -=50;
 			gameM.bet += 50;
 			moneyText();
 		}
@@ -169,7 +168,6 @@ window.onload = function(){
 			var putChipX = betX, putChipY = canH/2;
 			cxt_sgl.drawImage(img, 1247, 635, chipW, chipH, putChipX -2*chipCN.C4, putChipY - 2*chipCN.C4, chipDrW, chipDrH);
 			chipCN.C4++;
-			gameM.re -=100;
 			gameM.bet += 100;
 			moneyText();
 		}
@@ -180,6 +178,8 @@ window.onload = function(){
 				alert("请先投注");
 				return;
 			}
+			gameM.re -= gameM.bet;
+			moneyText();
 			dealPok();
 			cxt_sgl.clearRect(dealtxtX, dealtxtY-10, dealtxtW.width, 60);
 			controlText();
