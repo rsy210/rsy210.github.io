@@ -1,7 +1,7 @@
 window.onload = function(){
 
 
-	//首页，事件委托，监听点击事件是单机还是多人
+	//首页，事件委托，监听点击事件是单机、双人（同机）、多人在线
 	var modulesBt = document.getElementById("modules");
 	var game_container = document.getElementById("game_container");
 	var home_page = document.getElementById("home");
@@ -16,7 +16,7 @@ window.onload = function(){
 			home_page.style.display="none";
 			game_container.style.display="block";
 			can_node.style.display="block";
-			initCan();
+			initCan(idx);
 		}
 	});
 
@@ -73,14 +73,18 @@ window.onload = function(){
     var standtxtW;
 
     //投注圆圈区域绘制
-    cxt_sgl.strokeStyle = "rgba(255,255,255,0.6)";
     var betX = canW/8;
     var betY = canH/2;
     var betR = canW/16;
-	cxt_sgl.beginPath();
-	cxt_sgl.arc(betX, betY, betR, 0, Math.PI*2,true);
-	cxt_sgl.closePath();
-	cxt_sgl.stroke();
+    betArc();
+    function betArc(){
+    	cxt_sgl.strokeStyle = "rgba(255,255,255,0.6)";
+    	cxt_sgl.beginPath();
+		cxt_sgl.arc(betX, betY, betR, 0, Math.PI*2,true);
+		cxt_sgl.closePath();
+		cxt_sgl.stroke();
+    }
+	
 
 	//筹码绘制
 	var chipW = 200, chipH = 200;
@@ -97,8 +101,25 @@ window.onload = function(){
 		cxt_sgl.drawImage(img, 1247, 215, chipW, chipH, chip2X, chip2Y, chipDrW, chipDrH);//10
 		cxt_sgl.drawImage(img, 1247, 425, chipW, chipH, chip3X, chip3Y, chipDrW, chipDrH);//50
 		cxt_sgl.drawImage(img, 1247, 635, chipW, chipH, chip4X, chip4Y, chipDrW, chipDrH);//100
+		
 	}
-	
+	//清除下注按钮
+	var clearX = chip2X + chipDrW + chipDrW/2 -5, clearY = chip1Y + chipDrW/2 -5;
+	var clearW = chipDrW+10, clearH =  chipDrW+10;
+	cxt_sgl.strokeStyle = "rgba(255,255,255,0.2)";
+    cxt_sgl.strokeRect(chip2X + chipDrW + chipDrW/2 -5, chip1Y + chipDrW/2 -5, chipDrW+10, chipDrW+10);
+	cxt_sgl.fillStyle = "#fff";
+    cxt_sgl.font = "1.2rem Microsoft YaHei";
+    cxt_sgl.textAlign = 'start';
+    cxt_sgl.textBaseline = 'top';
+    var cleartxt1="清除";
+    var cleartxt2="赌注";
+    //var clearW=cxt_sgl.measureText(cleartxt).width;
+    cxt_sgl.fillText(cleartxt1, chip2X + chipDrW + chipDrW/2, chip1Y + chipDrW/2, chipDrW);
+    cxt_sgl.textBaseline = 'bottom';
+    cxt_sgl.fillText(cleartxt2, chip2X + chipDrW + chipDrW/2, chip1Y + 3*chipDrW/2, chipDrW);
+
+
 	
 	
 	var gameM = {
@@ -137,9 +158,9 @@ window.onload = function(){
 		if(!dealFlag){
 		
 			//添加筹码
-			if(handleEvent(cp, chip1X, chip1Y, chipDrW, chipDrH)){
+			if(handleEvent(cp, chip1X, chip1Y, chipDrW, chipDrW)){
 				var putChipX = betX - chipDrW, putChipY = canH/2 - chipDrW;
-				if(gameM.re<=0){alert("钱不够喽");return;}
+				if(gameM.bet +1 > gameM.re){alert("下注数超过总额");return;}
 				cxt_sgl.drawImage(img, 1247,   5, chipW, chipH, putChipX -2*chipCN.C1, putChipY - 3*chipCN.C1, chipDrW, chipDrH);
 				chipCN.C1++;
 				//gameM.re--;
@@ -147,7 +168,7 @@ window.onload = function(){
 				moneyText();
 			}
 			if(handleEvent(cp, chip2X, chip2Y, chipDrW, chipDrH)){
-				if(gameM.re<=0){alert("钱不够喽");return;}
+				if(gameM.bet +10 > gameM.re){alert("下注数超过总额");return;}
 				var putChipX = betX, putChipY = canH/2 - chipDrW;
 				cxt_sgl.drawImage(img, 1247, 215, chipW, chipH, putChipX -2*chipCN.C2, putChipY - 2*chipCN.C2, chipDrW, chipDrH);
 				chipCN.C2++;
@@ -156,7 +177,7 @@ window.onload = function(){
 				moneyText();
 			}
 			if(handleEvent(cp, chip3X, chip3Y, chipDrW, chipDrH)){
-				if(gameM.re<=0){alert("钱不够喽");return;}
+				if(gameM.bet +50 > gameM.re){alert("下注数超过总额");return;}
 				var putChipX = betX - chipDrW, putChipY = canH/2;
 				cxt_sgl.drawImage(img, 1247, 425, chipW, chipH, putChipX -2*chipCN.C3, putChipY - 2*chipCN.C3, chipDrW, chipDrH);
 				chipCN.C3++;
@@ -164,11 +185,18 @@ window.onload = function(){
 				moneyText();
 			}
 			if(handleEvent(cp, chip4X, chip4Y, chipDrW, chipDrH)){
-				if(gameM.re<=0){alert("钱不够喽");return;}
+				if(gameM.bet + 100 > gameM.re){alert("下注数超过总额");return;}
 				var putChipX = betX, putChipY = canH/2;
 				cxt_sgl.drawImage(img, 1247, 635, chipW, chipH, putChipX -2*chipCN.C4, putChipY - 2*chipCN.C4, chipDrW, chipDrH);
 				chipCN.C4++;
 				gameM.bet += 100;
+				moneyText();
+			}
+			//清除筹码
+			if(handleEvent(cp, clearX, clearY, clearW, clearH) && gameM.bet > 0){
+				cxt_sgl.clearRect(0, 0, canW/4, canH/2+betR);
+				betArc();
+				gameM.bet = 0;
 				moneyText();
 			}
 
@@ -178,12 +206,14 @@ window.onload = function(){
 					alert("请先投注");
 					return;
 				}
+				if(gameM.bet > gameM.re){alert("下注数超过总额");return;}
 				gameM.re -= gameM.bet;
 				moneyText();
-				dealPok();
 				cxt_sgl.clearRect(dealtxtX, dealtxtY-10, dealtxtW.width, 60);
 				controlText();
 				dealFlag = true;
+				dealPok();
+				gameState(pCount.player, pCount.banker, 0);
 			}
 
 		}else{
@@ -194,9 +224,9 @@ window.onload = function(){
 				new pokerObject(pyerN, canW/2 + (++hitNum)*10, canH/2 + 20);
 				pCount.player = getpCount(pCount.player, pyerN, 1);
 				pCountText(1);
-				console.log(pCount.player);
+				//console.log(pCount.player);
 				gameState(pCount.player, pCount.banker, 1);
-				console.log(pCount.player);
+				//console.log(pCount.player);
 				//gameState(pCount.player, "YOU")
 				}
 				gameState(pCount.player, pCount.banker, 1);
@@ -205,7 +235,7 @@ window.onload = function(){
 				//点击stand 听牌
 				new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
 				pCountText(0);
-				while(pCount.banker <= 17){
+				while(pCount.banker < 17){
 					var bkerN = getRdmN(52);
 					new pokerObject(bkerN, canW/2 + (++standNum)*10, canH/4);
 					pCount.banker = getpCount(pCount.banker, bkerN, 0);
@@ -230,28 +260,22 @@ window.onload = function(){
 			//flag 为0 代表对初始发完牌的情况判断
 			if(pyNum === 21 && bkNum != 21){
 				console.log("YOU has BJ");
-				gameDataInit();
 				gameM.re += 2*gameM.bet;
-				gameM.time++;
-				moneyText();
+				gameDataInit();
 				return;
 			}
 			if(pyNum != 21 && bkNum === 21){
 				console.log("DEALER has BJ");
 				new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
 				gameDataInit();
-				gameM.time++;
-				moneyText();
 				return;
 			}
 			if(pyNum === 21 && bkNum === 21){
 				//玩家庄家点数都为21，平局
 					new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
 					alert("PUSH（平）");
-					gameDataInit();
 					gameM.re += gameM.bet;
-					gameM.time++;
-					moneyText();
+					gameDataInit();
 					return;
 				}
 		}
@@ -261,8 +285,6 @@ window.onload = function(){
 				//玩家点数大于21，玩家爆
 				alert("YOU BUST（你的点数爆了）");
 				gameDataInit();
-				gameM.time++;
-				moneyText();
 				return;
 				}
 				if(pyNum === 21 && bkNum != 21){
@@ -270,20 +292,17 @@ window.onload = function(){
 					new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
 					pCountText(0);
 					alert("YOU WIN（21点你赢啦）");
-					gameDataInit();
+					
 					gameM.re += 2*gameM.bet;
-					gameM.time++;
-					moneyText();
+					gameDataInit();
 					return;
 				}
 				if(pyNum === 21 && bkNum === 21){
 				//玩家庄家点数都为21，平局
 					new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
 					alert("PUSH（平）");
-					gameDataInit();
 					gameM.re += gameM.bet;
-					gameM.time++;
-					moneyText();
+					gameDataInit();
 					return;
 				}
 		}
@@ -291,43 +310,38 @@ window.onload = function(){
 				if(pCount.banker > 21){
 					//庄家点数大于21，庄家爆
 					alert("DEALER BUST（庄家爆）");
-					gameDataInit();
 					gameM.re += 2*gameM.bet;//玩家获得2倍赌注
-					gameM.time++;
-					moneyText();
+					gameDataInit();
 					return false;
 				}
+				return true;
 			}
 		if(flag === 32){
 				if(pyNum > bkNum && pyNum <= 21){
 					//
 					alert("YOU WIN");
-					gameDataInit();
+					
 					gameM.re += 2*gameM.bet;
-					gameM.time++;
-					moneyText();
+					gameDataInit();
 					return;
 				}
 				if(bkNum > pyNum && bkNum <= 21){
 					//庄家赢
 					alert("DEALER WIN YOU lose");
 					gameDataInit();
-					gameM.time++;
-					moneyText();
 					return;
 				}
 				if(pyNum === bkNum ){
 					////玩家庄家点数相同
 					alert("PUSH(平)");
-					gameDataInit();
 					gameM.re += gameM.bet;
-					gameM.time++;
-					moneyText();
+					gameDataInit();
 					return;
 				}
 			}
 	}
 	function gameDataInit(){
+		//游戏过程中相关记录数据初始化
 		cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
 		//对显示点数位置清除
 		/*cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
@@ -342,6 +356,8 @@ window.onload = function(){
 		hasANum.pyer = 0;
 		hitNum = 0;
 		standNum = 0;
+		gameM.time++;
+		moneyText();
 	}
 
 	function handleEvent(cp, x, y, w, h){
@@ -391,8 +407,8 @@ window.onload = function(){
 		var bkerN1 = getRdmN(pokNum);
 		new pokerObject(bkerN1, canW/2, canH/4);
 		pCount.banker = getpCount(pCount.banker, bkerN1, 0);
+		console.log(pCount.banker);
 		
-		gameState(pCount.player, pCount.banker, 0);
 		
 	}
 	function pokerObject(i, pokDrX, pokDrY, bg){
@@ -420,13 +436,13 @@ window.onload = function(){
 		//获取当前扑克牌总值
 			pct += getPkN(rdm, pct, role);
 			if (role === 0) {
-				console.log(hasANum.bker);
+				//console.log(hasANum.bker);
 				if (hasANum.bker >= 1 && pct > 21){
 					pct -= hasANum.bker*10;
 					hasANum.bker = 0;
 				}
 			}else if (role === 1) {
-				console.log(hasANum.pyer);
+				//console.log(hasANum.pyer);
 				if (hasANum.pyer >= 1 && pct > 21){
 					pct -= hasANum.pyer*10;
 					hasANum.pyer = 0;
@@ -461,10 +477,10 @@ window.onload = function(){
 			}
 			if (role === 0) {
 				hasANum.bker++;
-				console.log(hasANum.bker);
+				//console.log(hasANum.bker);
 			} else if (role === 1) {
 				hasANum.pyer++;
-				console.log(hasANum.pyer);
+				//console.log(hasANum.pyer);
 			}
 			return 11;
 		}
@@ -510,11 +526,19 @@ window.onload = function(){
 	function moneyText(){
 	//余额和投注钱数文本绘制
 	cxt_sgl.fillStyle = "#fff";
-    cxt_sgl.font = "30px Microsoft YaHei";
+    cxt_sgl.font = "1.2rem Microsoft YaHei";
     cxt_sgl.textAlign = 'start';
     cxt_sgl.textBaseline = 'top';
-    var reMX = betX + 15 - betR, reMY = canH/2 + betR + 30 + canW/16;
-	var gmTmX = reMX, gmTmY = canH/2 + betR + 60 + canW/16;
+    
+	var bettxtX = betX + 15 - betR, bettxtY = canH/2 + betR + 30 + canW/16;
+    var reMX = betX + 15 - betR, reMY = canH/2 + betR + 60 + canW/16;
+	var gmTmX = reMX, gmTmY = canH/2 + betR + 90 + canW/16;
+
+	var bettxt="下注：";
+    var bettxtW=cxt_sgl.measureText(bettxt+"2000").width;
+    cxt_sgl.clearRect(bettxtX, bettxtY, bettxtW, 30);
+    cxt_sgl.fillText(bettxt + gameM.bet, bettxtX, bettxtY);
+
     var reMtxt="余额：";
     var reMtxtW=cxt_sgl.measureText(reMtxt+"2000").width;
     cxt_sgl.clearRect(reMX, reMY, reMtxtW, 30);
@@ -599,6 +623,7 @@ window.onload = function(){
 }
 
 function getNodeIdx(parNode, chilNode){
+	//子节点是父节点的第几个子孩子
 		var idx = 0;
 		while(chilNode = chilNode.previousSibling){
 			if(chilNode.nodeType == 1){
@@ -608,6 +633,7 @@ function getNodeIdx(parNode, chilNode){
 		return idx;
 	}
 	function getIdxbyNode(parNode, idx){
+		//根据孩子编号获取对应的孩子节点
 		var nodes = parNode.childNodes;
 		var nLen = nodes.length;
 		for(var i= 0; i< nLen -1; i++){

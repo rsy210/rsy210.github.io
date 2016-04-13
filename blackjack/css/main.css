@@ -11,15 +11,32 @@ textarea{resize:none;}
 
 
 
-
-.single_game_bt, .mul_game_bt{
-	cursor: pointer;
+#home header{
+	width: 100%;
+	height: 5em;
+	text-align: center;
+	padding: 3em 0 0;
 }
-#game_container,#canvas_single,#canvas_mul{
+#home #modules button{
+	display: block;
+	cursor: pointer;
+	font-size: 1.3em;line-height: 2;
+	width: 22em;height: 4em;
+	margin: 2em auto;
+	color: #fff;
+	background: rgba(0,0,0,0.7);
+}
+#modules button:hover{
+	border: 6px solid #000;
+}
+#game_container,#canvas_single,#canvas_two,#canvas_mul{
 	display: none;
 }
 
 /* 单机对战 */
 #canvas_single{
 	background: #000;
+}
+#modules button.mul_game_bt{
+	cursor:not-allowed;
 }
