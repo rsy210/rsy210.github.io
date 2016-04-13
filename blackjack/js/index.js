@@ -23,9 +23,6 @@ window.onload = function(){
 	
 	function initCan(){
 
-
-
-
 	var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 	var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
@@ -97,9 +94,9 @@ window.onload = function(){
 	var chipDrW = canW/32, chipDrH = canW/32;
 	img.onload = function(){
 		cxt_sgl.drawImage(img, 1247,   5, chipW, chipH, chip1X, chip1Y, chipDrW, chipDrH);//1
-	cxt_sgl.drawImage(img, 1247, 215, chipW, chipH, chip2X, chip2Y, chipDrW, chipDrH);//10
-	cxt_sgl.drawImage(img, 1247, 425, chipW, chipH, chip3X, chip3Y, chipDrW, chipDrH);//50
-	cxt_sgl.drawImage(img, 1247, 635, chipW, chipH, chip4X, chip4Y, chipDrW, chipDrH);//100
+		cxt_sgl.drawImage(img, 1247, 215, chipW, chipH, chip2X, chip2Y, chipDrW, chipDrH);//10
+		cxt_sgl.drawImage(img, 1247, 425, chipW, chipH, chip3X, chip3Y, chipDrW, chipDrH);//50
+		cxt_sgl.drawImage(img, 1247, 635, chipW, chipH, chip4X, chip4Y, chipDrW, chipDrH);//100
 	}
 	
 	
@@ -128,7 +125,7 @@ window.onload = function(){
 		banker : 0,
 		player : 0
 	};
- moneyText();
+ 	moneyText();
 	can_sgl.addEventListener('click', function(e){
 		var e = e || window.event;
 		var target = e.target || e.srcElement;
@@ -139,55 +136,55 @@ window.onload = function(){
 
 		if(!dealFlag){
 		
-		//添加筹码
-		if(handleEvent(cp, chip1X, chip1Y, chipDrW, chipDrH)){
-			var putChipX = betX - chipDrW, putChipY = canH/2 - chipDrW;
-			if(gameM.re<=0){alert("钱不够喽");return;}
-			cxt_sgl.drawImage(img, 1247,   5, chipW, chipH, putChipX -2*chipCN.C1, putChipY - 3*chipCN.C1, chipDrW, chipDrH);
-			chipCN.C1++;
-			//gameM.re--;
-			gameM.bet++;
-			moneyText();
-		}
-		if(handleEvent(cp, chip2X, chip2Y, chipDrW, chipDrH)){
-			if(gameM.re<=0){alert("钱不够喽");return;}
-			var putChipX = betX, putChipY = canH/2 - chipDrW;
-			cxt_sgl.drawImage(img, 1247, 215, chipW, chipH, putChipX -2*chipCN.C2, putChipY - 2*chipCN.C2, chipDrW, chipDrH);
-			chipCN.C2++;
-			//gameM.re -=10;
-			gameM.bet += 10;
-			moneyText();
-		}
-		if(handleEvent(cp, chip3X, chip3Y, chipDrW, chipDrH)){
-			if(gameM.re<=0){alert("钱不够喽");return;}
-			var putChipX = betX - chipDrW, putChipY = canH/2;
-			cxt_sgl.drawImage(img, 1247, 425, chipW, chipH, putChipX -2*chipCN.C3, putChipY - 2*chipCN.C3, chipDrW, chipDrH);
-			chipCN.C3++;
-			gameM.bet += 50;
-			moneyText();
-		}
-		if(handleEvent(cp, chip4X, chip4Y, chipDrW, chipDrH)){
-			if(gameM.re<=0){alert("钱不够喽");return;}
-			var putChipX = betX, putChipY = canH/2;
-			cxt_sgl.drawImage(img, 1247, 635, chipW, chipH, putChipX -2*chipCN.C4, putChipY - 2*chipCN.C4, chipDrW, chipDrH);
-			chipCN.C4++;
-			gameM.bet += 100;
-			moneyText();
-		}
-
-		//点击发牌
-		if(handleEvent(cp, dealtxtX, dealtxtY, dealtxtW.width, 30)){
-			if(gameM.bet <= 0){
-				alert("请先投注");
-				return;
+			//添加筹码
+			if(handleEvent(cp, chip1X, chip1Y, chipDrW, chipDrH)){
+				var putChipX = betX - chipDrW, putChipY = canH/2 - chipDrW;
+				if(gameM.re<=0){alert("钱不够喽");return;}
+				cxt_sgl.drawImage(img, 1247,   5, chipW, chipH, putChipX -2*chipCN.C1, putChipY - 3*chipCN.C1, chipDrW, chipDrH);
+				chipCN.C1++;
+				//gameM.re--;
+				gameM.bet++;
+				moneyText();
 			}
-			gameM.re -= gameM.bet;
-			moneyText();
-			dealPok();
-			cxt_sgl.clearRect(dealtxtX, dealtxtY-10, dealtxtW.width, 60);
-			controlText();
-			dealFlag = true;
-		}
+			if(handleEvent(cp, chip2X, chip2Y, chipDrW, chipDrH)){
+				if(gameM.re<=0){alert("钱不够喽");return;}
+				var putChipX = betX, putChipY = canH/2 - chipDrW;
+				cxt_sgl.drawImage(img, 1247, 215, chipW, chipH, putChipX -2*chipCN.C2, putChipY - 2*chipCN.C2, chipDrW, chipDrH);
+				chipCN.C2++;
+				//gameM.re -=10;
+				gameM.bet += 10;
+				moneyText();
+			}
+			if(handleEvent(cp, chip3X, chip3Y, chipDrW, chipDrH)){
+				if(gameM.re<=0){alert("钱不够喽");return;}
+				var putChipX = betX - chipDrW, putChipY = canH/2;
+				cxt_sgl.drawImage(img, 1247, 425, chipW, chipH, putChipX -2*chipCN.C3, putChipY - 2*chipCN.C3, chipDrW, chipDrH);
+				chipCN.C3++;
+				gameM.bet += 50;
+				moneyText();
+			}
+			if(handleEvent(cp, chip4X, chip4Y, chipDrW, chipDrH)){
+				if(gameM.re<=0){alert("钱不够喽");return;}
+				var putChipX = betX, putChipY = canH/2;
+				cxt_sgl.drawImage(img, 1247, 635, chipW, chipH, putChipX -2*chipCN.C4, putChipY - 2*chipCN.C4, chipDrW, chipDrH);
+				chipCN.C4++;
+				gameM.bet += 100;
+				moneyText();
+			}
+
+			//点击发牌
+			if(handleEvent(cp, dealtxtX, dealtxtY, dealtxtW.width, 30)){
+				if(gameM.bet <= 0){
+					alert("请先投注");
+					return;
+				}
+				gameM.re -= gameM.bet;
+				moneyText();
+				dealPok();
+				cxt_sgl.clearRect(dealtxtX, dealtxtY-10, dealtxtW.width, 60);
+				controlText();
+				dealFlag = true;
+			}
 
 		}else{
 			if (handleEvent(cp, hitxtX, hitxtY, hitxtW, 30)) {
@@ -198,178 +195,153 @@ window.onload = function(){
 				pCount.player = getpCount(pCount.player, pyerN, 1);
 				pCountText(1);
 				console.log(pCount.player);
-				if(pCount.player > 21){
-					alert("YOU BUST");
-					cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-					cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);
-					/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-					cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-					dealText();
-					dealFlag = false;
-					pCount.player = 0;
-					pCount.banker = 0;
-					hasANum.bker = 0;
-					hasANum.pyer = 0;
-					hitNum = 0;
-					gameM.time++;
-					moneyText();
-				}
-				if(pCount.player === 21 && pCount.banker != 21){
-					alert("YOU WIN");
-					cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-					cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);
-					/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-					cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-					dealText();
-					dealFlag = false;
-					pCount.player = 0;
-					pCount.banker = 0;
-					hasANum.bker = 0;
-					hasANum.pyer = 0;
-					hitNum = 0;
-					gameM.re += 2*gameM.bet;
-					gameM.time++;
-					moneyText();
-				}
-				if(pCount.player === 21 && pCount.banker === 21){
-					alert("PUSH");
-					cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-					cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);
-					/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-					cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-					dealText();
-					dealFlag = false;
-					pCount.player = 0;
-					pCount.banker = 0;
-					hasANum.bker = 0;
-					hasANum.pyer = 0;
-
-					gameM.re += gameM.bet;
-					gameM.time++;
-					moneyText();
-					return;
-				}
+				gameState(pCount.player, pCount.banker, 1);
 				console.log(pCount.player);
 				//gameState(pCount.player, "YOU")
-				}else if(pCount.player > 21){
-					alert("YOU BUST");
-					cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-					cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);
-					/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-					cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-					dealText();
-					dealFlag = false;
-					pCount.player = 0;
-					pCount.banker = 0;
-					hasANum.bker = 0;
-					hasANum.pyer = 0;
-					gameM.time++;
-					moneyText();
 				}
+				gameState(pCount.player, pCount.banker, 1);
 			}
 			if (handleEvent(cp, standtxtX,standtxtY,standtxtW, 30) && pCount.player < 21){
 				//点击stand 听牌
 				new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
-				while(pCount.banker <= pCount.player){
+				pCountText(0);
+				while(pCount.banker <= 17){
 					var bkerN = getRdmN(52);
 					new pokerObject(bkerN, canW/2 + (++standNum)*10, canH/4);
 					pCount.banker = getpCount(pCount.banker, bkerN, 0);
 					console.log(pCount.banker);
 					pCountText(0);
 					pCountText(1);
-
-
-					if(pCount.banker > 21){
-						alert("DEALER BUST（庄家爆）");
-						cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-						//对显示点数位置清除
-						cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);
-						/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-						cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-						dealText();
-						dealFlag = false;
-						pCount.player = 0;
-						pCount.banker = 0;
-						hasANum.bker = 0;
-						hasANum.pyer = 0;
-						gameM.re += 2*gameM.bet;
-						gameM.time++;
-						moneyText();
-						return;
-					}
-					if(pCount.player === pCount.banker ){
-						alert("PUSH");
-						cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-						//对显示点数位置清除
-						cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);
-						/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-						cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-						dealText();
-						dealFlag = false;
-						pCount.player = 0;
-						pCount.banker = 0;
-						hasANum.bker = 0;
-						hasANum.pyer = 0;
-						gameM.re += gameM.bet;
-						gameM.time++;
-						moneyText();
-						return;
-					}
-					if(pCount.banker > pCount.player ){
-						alert("DEALER WIN YOU lose");
-						cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-						//对显示点数位置清除
-						cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);;
-						/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-						cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-						dealText();
-						dealFlag = false;
-						pCount.player = 0;
-						pCount.banker = 0;
-						hasANum.bker = 0;
-						hasANum.pyer = 0;
-						gameM.time++;
-						moneyText();
+					if(!gameState(pCount.player, pCount.banker, 31)){
 						return;
 					}
 				}
-				if(pCount.banker > pCount.player && pCount.banker<=21){
-						alert("DEALER WIN YOU lose");
-						cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-						//对显示点数位置清除
-						cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);
-						/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-						cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-						dealText();
-						dealFlag = false;
-						pCount.player = 0;
-						pCount.banker = 0;
-						hasANum.bker = 0;
-						hasANum.pyer = 0;
-						gameM.time++;
-						moneyText();
-						return;
-					}
+				gameState(pCount.player, pCount.banker, 32);
+				
 			}
 		}
 
 	}, false);
 
-	function gameState(curNum0, curNum1){
-		if (curNum > 21) {
-			alert(obj + " BUST");
+	function gameState(pyNum, bkNum, flag){
+
+		//bj
+		if(flag === 0) {
+			//flag 为0 代表对初始发完牌的情况判断
+			if(pyNum === 21 && bkNum != 21){
+				console.log("YOU has BJ");
+				gameDataInit();
+				gameM.re += 2*gameM.bet;
+				gameM.time++;
+				moneyText();
+				return;
+			}
+			if(pyNum != 21 && bkNum === 21){
+				console.log("DEALER has BJ");
+				new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
+				gameDataInit();
+				gameM.time++;
+				moneyText();
+				return;
+			}
+			if(pyNum === 21 && bkNum === 21){
+				//玩家庄家点数都为21，平局
+					new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
+					alert("PUSH（平）");
+					gameDataInit();
+					gameM.re += gameM.bet;
+					gameM.time++;
+					moneyText();
+					return;
+				}
 		}
-		if (curNum === 21) {
-			alert(obj + " WIN");
+		if(flag === 1) {
+			//hit过程的判断
+				if(pyNum > 21){
+				//玩家点数大于21，玩家爆
+				alert("YOU BUST（你的点数爆了）");
+				gameDataInit();
+				gameM.time++;
+				moneyText();
+				return;
+				}
+				if(pyNum === 21 && bkNum != 21){
+				//玩家点数等于21，庄家不为21，玩家赢
+					new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
+					pCountText(0);
+					alert("YOU WIN（21点你赢啦）");
+					gameDataInit();
+					gameM.re += 2*gameM.bet;
+					gameM.time++;
+					moneyText();
+					return;
+				}
+				if(pyNum === 21 && bkNum === 21){
+				//玩家庄家点数都为21，平局
+					new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
+					alert("PUSH（平）");
+					gameDataInit();
+					gameM.re += gameM.bet;
+					gameM.time++;
+					moneyText();
+					return;
+				}
 		}
+		if(flag === 31){
+				if(pCount.banker > 21){
+					//庄家点数大于21，庄家爆
+					alert("DEALER BUST（庄家爆）");
+					gameDataInit();
+					gameM.re += 2*gameM.bet;//玩家获得2倍赌注
+					gameM.time++;
+					moneyText();
+					return false;
+				}
+			}
+		if(flag === 32){
+				if(pyNum > bkNum && pyNum <= 21){
+					//
+					alert("YOU WIN");
+					gameDataInit();
+					gameM.re += 2*gameM.bet;
+					gameM.time++;
+					moneyText();
+					return;
+				}
+				if(bkNum > pyNum && bkNum <= 21){
+					//庄家赢
+					alert("DEALER WIN YOU lose");
+					gameDataInit();
+					gameM.time++;
+					moneyText();
+					return;
+				}
+				if(pyNum === bkNum ){
+					////玩家庄家点数相同
+					alert("PUSH(平)");
+					gameDataInit();
+					gameM.re += gameM.bet;
+					gameM.time++;
+					moneyText();
+					return;
+				}
+			}
+	}
+	function gameDataInit(){
+		cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
+		//对显示点数位置清除
+		/*cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
+		cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);*/
+		/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
+		cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
+		dealText();
+		dealFlag = false;
+		pCount.player = 0;
+		pCount.banker = 0;
+		hasANum.bker = 0;
+		hasANum.pyer = 0;
+		hitNum = 0;
+		standNum = 0;
 	}
 
 	function handleEvent(cp, x, y, w, h){
@@ -392,6 +364,8 @@ window.onload = function(){
 						];
 		var pokW = 128, pokH = 191;
 		var pokDrW = canH/6*pokW/pokH, pokDrH = canH/6;*/
+
+		cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
 
 		//每次发牌前对发牌区域进行清除操作
 		cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, canW, canH/6+10);
@@ -418,67 +392,8 @@ window.onload = function(){
 		new pokerObject(bkerN1, canW/2, canH/4);
 		pCount.banker = getpCount(pCount.banker, bkerN1, 0);
 		
+		gameState(pCount.player, pCount.banker, 0);
 		
-		
-
-
-
-		if(pCount.player === 21 && pCount.banker === 21){
-			console.log("PUSH");
-			new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
-			cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-			//对显示点数位置清除
-			cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);
-			/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-			cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-			dealText();
-			dealFlag = false;
-			pCount.player = 0;
-			pCount.banker = 0;
-			gameM.re += gameM.bet;
-			gameM.time++;
-			moneyText();
-			return;
-		}
-		if(pCount.player === 21 && pCount.banker != 21){
-			console.log("YOU are BJ");
-			cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-			//对显示点数位置清除
-			cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);
-			/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-			cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-			dealText();
-			dealFlag = false;
-			pCount.player = 0;
-			pCount.banker = 0;
-			hasANum.bker = 0;
-			hasANum.pyer = 0;
-			gameM.re += 2*gameM.bet;
-			gameM.time++;
-			moneyText();
-			return;
-		}
-		if(pCount.player != 21 && pCount.banker === 21){
-			new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
-			cxt_sgl.clearRect(hitxtX, hitxtY-10, hitxtW + standtxtW + 30, 60);
-			//对显示点数位置清除
-			cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
-						cxt_sgl.clearRect(canW/4, canH/2 + 21, cxt_sgl.measureText("玩家点数：200").width, 33);
-			/*cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, 3*canH/6*128/191 , canH/6+10);
-			cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH*3/4 - 5, 3*canH/6*128/191, canH/6+10);*/
-			dealText();
-			console.log("DEALER are BJ");
-			dealFlag = false;
-			pCount.player = 0;
-			pCount.banker = 0;
-			hasANum.bker = 0;
-			hasANum.pyer = 0;
-			gameM.time++;
-			moneyText();
-			return;
-		}
 	}
 	function pokerObject(i, pokDrX, pokDrY, bg){
 		//绘制一个扑克对象
