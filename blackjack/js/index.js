@@ -95,10 +95,13 @@ window.onload = function(){
 	var chip3X = chip1X, chip3Y = canH/2 + betR + 20 + canW/32;
 	var chip4X = chip2X, chip4Y = chip3Y;
 	var chipDrW = canW/32, chipDrH = canW/32;
-	cxt_sgl.drawImage(img, 1247,   5, chipW, chipH, chip1X, chip1Y, chipDrW, chipDrH);//1
+	img.onload = function(){
+		cxt_sgl.drawImage(img, 1247,   5, chipW, chipH, chip1X, chip1Y, chipDrW, chipDrH);//1
 	cxt_sgl.drawImage(img, 1247, 215, chipW, chipH, chip2X, chip2Y, chipDrW, chipDrH);//10
 	cxt_sgl.drawImage(img, 1247, 425, chipW, chipH, chip3X, chip3Y, chipDrW, chipDrH);//50
 	cxt_sgl.drawImage(img, 1247, 635, chipW, chipH, chip4X, chip4Y, chipDrW, chipDrH);//100
+	}
+	
 	
 	
 	var gameM = {
@@ -225,6 +228,7 @@ window.onload = function(){
 					pCount.banker = 0;
 					hasANum.bker = 0;
 					hasANum.pyer = 0;
+					hitNum = 0;
 					gameM.re += 2*gameM.bet;
 					gameM.time++;
 					moneyText();
@@ -242,6 +246,7 @@ window.onload = function(){
 					pCount.banker = 0;
 					hasANum.bker = 0;
 					hasANum.pyer = 0;
+
 					gameM.re += gameM.bet;
 					gameM.time++;
 					moneyText();
@@ -358,7 +363,7 @@ window.onload = function(){
 
 	}, false);
 
-	function gameState(curNum, obj){
+	function gameState(curNum0, curNum1){
 		if (curNum > 21) {
 			alert(obj + " BUST");
 		}
