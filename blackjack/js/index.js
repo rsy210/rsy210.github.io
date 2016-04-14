@@ -437,7 +437,7 @@ window.onload = function(){
 	function gameResultTxT(txt){
 		//游戏结束时输赢状态绘制
 		cxt_sgl.fillStyle = "red";
-    	cxt_sgl.font = "1.8rem  'Times New Roman', Times, serif";
+    	cxt_sgl.font = "1.8rem  'Times New Roman', Times, serif 900";
     	cxt_sgl.textAlign = 'start';
     	cxt_sgl.textBaseline = 'middle';
     	var gRsX = canW*3/4 + 20, gRsY = canH/2;
