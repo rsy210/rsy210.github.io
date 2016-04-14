@@ -9,13 +9,27 @@ textarea{resize:none;}
 .clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; } 
 .clearfix { *zoom:1;clear: both; } 
 
+#home{
+	width: 100%;
+	height: 100%;
 
+	position: relative;
+	background: rgba(0,0,0,0.1);
+}
 
 #home header{
 	width: 100%;
 	height: 5em;
 	text-align: center;
-	padding: 3em 0 0;
+	padding: 2em 0 0;
+	background: rgba(0,0,0,0.5);
+	border-bottom: 2px solid #000;
+	border-top: 2px solid #000;
+	color: #fff;
+}
+#home header{
+	font-size: 1.6em;
+
 }
 #home #modules button{
 	display: block;
@@ -24,10 +38,10 @@ textarea{resize:none;}
 	width: 22em;height: 4em;
 	margin: 2em auto;
 	color: #fff;
-	background: rgba(0,0,0,0.7);
+	background: #333;
 }
 #modules button:hover{
-	border: 6px solid #000;
+	border: 0.6em solid #000;
 }
 #game_container,#canvas_single,#canvas_two,#canvas_mul{
 	display: none;
@@ -35,8 +49,35 @@ textarea{resize:none;}
 
 /* 单机对战 */
 #canvas_single{
-	background: #000;
+	background: url("../img/dzbg.png") no-repeat;
+	overflow: hidden;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+	border-radius: 10px;
 }
 #modules button.mul_game_bt{
 	cursor:not-allowed;
 }
+
+.help{
+	width: 5em;height: 5em;
+	position: absolute;
+	top: 12em;right: 5em;
+	background: url("../img/ht0.png") no-repeat;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+
+	transform: rotate(25deg);
+	-ms-transform: rotate(30deg);		/* IE 9 */
+	-webkit-transform: rotate(30deg);	/* Safari and Chrome */
+	-o-transform: rotate(30deg);		/* Opera */
+	-moz-transform: rotate(30deg);		/* Firefox */
+}
+.help:hover{
+	background: url("../img/ht1.png") no-repeat;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+};
