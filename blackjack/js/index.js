@@ -79,6 +79,7 @@ window.onload = function(){
     var betR = canW/16;
     betArc();
     function betArc(){
+    	cxt_sgl.lineWidth=5;
     	cxt_sgl.strokeStyle = "rgba(255,255,255,0.6)";
     	cxt_sgl.beginPath();
 		cxt_sgl.arc(betX, betY, betR, 0, Math.PI*2,true);
@@ -111,7 +112,7 @@ window.onload = function(){
 	cxt_sgl.strokeStyle = "rgba(255,255,255,0.8)";
     cxt_sgl.strokeRect(chip2X + chipDrW + chipDrW/2 -5, chip1Y + chipDrW/2 -5, chipDrW+10, chipDrW+10);
 	cxt_sgl.fillStyle = "#fff";
-    cxt_sgl.font = "1.2rem Microsoft YaHei";
+    cxt_sgl.font = "1.2em Microsoft YaHei";
     cxt_sgl.textAlign = 'start';
     cxt_sgl.textBaseline = 'top';
     var cleartxt1="清除";
@@ -122,7 +123,6 @@ window.onload = function(){
     cxt_sgl.fillText(cleartxt2, chip2X + chipDrW + chipDrW/2, chip1Y + 3*chipDrW/2, chipDrW);
 
     //首页
-    
     var indexTxt = "首页";
     var indexW=cxt_sgl.measureText(indexTxt).width;
     cxt_sgl.lineWidth=2;
@@ -167,8 +167,34 @@ window.onload = function(){
 		console.log(handleEvent(cp, canW-indexW-30, 30, indexW, 30));
 		if (handleEvent(cp, canW-indexW-35, 0, indexW + 10, indexW)) {
 			//回首页
-			home_page.style.display="block";
+			location.reload();
+			gameM = {
+				re : 200,
+				bet : 0,
+				time : 0
+			};
+		 chipCN = {
+			C1 : 0,
+			C2 : 0,
+			C3 : 0,
+			C4 : 0
+		}
+		dealFlag = false;
+		hitBkClick = false;//标记庄家hit是否可点
+
+		hitNum = 0; 
+		standNum = 0;
+		hasANum = {
+		bker : 0,
+		pyer : 0
+		};
+
+		pCount = {
+		banker : 0,
+		player : 0
+		};
 			game_container.style.display="none";
+				home_page.style.display="block";
 		}
 
 		if(!dealFlag && !hitBkClick){
@@ -237,14 +263,20 @@ window.onload = function(){
 			if (handleEvent(cp, hitxtX, hitxtY, hitxtW, 30)) {
 				//点击hit要牌
 				if(pCount.player < 21){
-				var pyerN = getRdmN(52);
-				new pokerObject(pyerN, canW/2 + (++hitNum)*10, canH/2 + 20);
-				pCount.player = getpCount(pCount.player, pyerN, 1);
-				pCountText(1);
-				//console.log(pCount.player);
-				gameState(pCount.player, pCount.banker, 1);
-				//console.log(pCount.player);
-				//gameState(pCount.player, "YOU")
+					var pyerN = getRdmN(52);
+					new pokerObject(pyerN, canW/2 + (++hitNum)*10, canH/2 + 20);
+					pCount.player = getpCount(pCount.player, pyerN, 1);
+					pCountText(1);
+					if (pCount.player === 21){
+						bkAction();
+					}
+					//console.log(pCount.player);
+					gameState(pCount.player, pCount.banker, 1);
+					//console.log(pCount.player);
+					//gameState(pCount.player, "YOU")
+				}
+				if (pCount.player === 21){
+					bkAction();
 				}
 				gameState(pCount.player, pCount.banker, 1);
 			}
@@ -272,14 +304,14 @@ window.onload = function(){
 				if(idx_i === 1){
 					
 					//如果是2人对战
-					if (pCount.banker < pCount.player && pCount.banker<=21){
+					if (pCount.banker <= pCount.player && pCount.banker<=21){
 						//
 						controlTextBk();
 						controlText(0.5, 0.5);
 						dealFlag = false;
 						hitBkClick = true;
 					}
-					if (pCount.banker >= pCount.player && pCount.banker<=21){
+					if (pCount.banker > pCount.player && pCount.banker<=21){
 						//canW*3/5 + hitxtW + 30
 						controlTextBk(0.5, 0.5);
 						hitBkClick = false;
@@ -287,9 +319,45 @@ window.onload = function(){
 					}
 				}
 				
-			}
-	
-						
+			}			
+		}
+		function bkAction(){
+			new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
+				pCountText(0);
+
+				if (idx_i === 0) {
+					while(pCount.banker < 17){
+						var bkerN = getRdmN(52);
+						new pokerObject(bkerN, canW/2 + (++standNum)*10, canH/4);
+						pCount.banker = getpCount(pCount.banker, bkerN, 0);
+						console.log(pCount.banker);
+						pCountText(0);
+						pCountText(1);
+						if(!gameState(pCount.player, pCount.banker, 31)){
+							return;
+						}
+					}
+					gameState(pCount.player, pCount.banker, 32);
+
+				}
+				
+				if(idx_i === 1){
+					
+					//如果是2人对战
+					if (pCount.banker <= pCount.player && pCount.banker<=21){
+						//
+						controlTextBk();
+						controlText(0.5, 0.5);
+						dealFlag = false;
+						hitBkClick = true;
+					}
+					if (pCount.banker > pCount.player && pCount.banker<=21){
+						//canW*3/5 + hitxtW + 30
+						controlTextBk(0.5, 0.5);
+						hitBkClick = false;
+						gameState(pCount.player, pCount.banker, 32);
+					}
+				}
 		}
 		if (hitBkClick) {
 				if(handleEvent(cp, canW*3/5, canH*1/8, hitxtBkW, 30)){
@@ -314,10 +382,11 @@ window.onload = function(){
 					}
 						controlTextBk(0.5, 0.5);
 						gameState(pCount.player, pCount.banker, 32);
-					
+					return;
 				}
+				return;
 			}
-
+			return;
 	}, false);
 
 	function gameState(pyNum, bkNum, flag){
@@ -356,7 +425,7 @@ window.onload = function(){
 				gameDataInit();
 				return;
 				}
-				if(pyNum === 21 && bkNum != 21){
+				/*if(pyNum === 21 && bkNum != 21){
 				//玩家点数等于21，庄家不为21，玩家赢
 					new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
 					pCountText(0);
@@ -365,7 +434,7 @@ window.onload = function(){
 					gameM.re += 2*gameM.bet;
 					gameDataInit();
 					return;
-				}
+				}*/
 				if(pyNum === 21 && bkNum === 21){
 				//玩家庄家点数都为21，平局
 					new pokerObject(bkerN0, canW/2-canH/6*128/191, canH/4);//bg
@@ -437,7 +506,7 @@ window.onload = function(){
 	function gameResultTxT(txt){
 		//游戏结束时输赢状态绘制
 		cxt_sgl.fillStyle = "red";
-    	cxt_sgl.font = "1.8rem  'Times New Roman', Times, serif 900";
+    	cxt_sgl.font = "1.8em  'Times New Roman', Times, serif 900";
     	cxt_sgl.textAlign = 'start';
     	cxt_sgl.textBaseline = 'middle';
     	var gRsX = canW*3/4 + 20, gRsY = canH/2;
@@ -450,7 +519,11 @@ window.onload = function(){
 	}
 
 	function handleEvent(cp, x, y, w, h){
-		//判断鼠标坐标位置是否在对象区域内部
+		/**判断鼠标坐标位置是否在对象区域内部
+		 **cp鼠标坐标位置,cp.x代表x坐标，cp.y代表y坐标
+		 **x,y分别代表所求对象区域的x,y坐标
+		 **w,h分别代表所求对象区域的宽高
+		 */
 		if(cp.x >= x && cp.x <= x + w && cp.y >= y && cp.y <= y + h){
 			return true;
 		}
@@ -471,8 +544,8 @@ window.onload = function(){
 		var pokDrW = canH/6*pokW/pokH, pokDrH = canH/6;*/
 		//	清除上局结果
 		cxt_sgl.clearRect(canW*3/4 + 2, canH/2 - 30,canW/4, 60);
-		//清除上局玩家点数
-		cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("玩家点数：200").width, 31);
+		//清除上局庄家点数
+		cxt_sgl.clearRect(canW/4, canH/2 - 53, cxt_sgl.measureText("庄家点数：200").width, 40);
 
 		//每次发牌前对发牌区域进行清除操作
 		cxt_sgl.clearRect(canW/2-canH/6*128/191 - 5, canH/4 - 5, canW, canH/6+10);
@@ -604,12 +677,12 @@ window.onload = function(){
 		if (role === 0) {
 			var bkCtxt="庄家点数：";
 	   		var bkCtxtW=cxt_sgl.measureText(bkCtxt+"200").width;
-	    	cxt_sgl.clearRect(bkCX, bkCY, bkCtxtW, 30);
+	    	cxt_sgl.clearRect(bkCX, bkCY, bkCtxtW, 31);
 	    	cxt_sgl.fillText(bkCtxt + pCount.banker, bkCX, bkCY);
 		} else if(role === 1){
 			var pyCtxt="玩家点数：";
 	    	var pyCtxtW=cxt_sgl.measureText(pyCtxt+"200").width;
-	    	cxt_sgl.clearRect(pyCX, pyCX, pyCtxtW, 30);
+	    	cxt_sgl.clearRect(pyCX, pyCX, pyCtxtW, 32);
 	    	cxt_sgl.fillText(pyCtxt + pCount.player, pyCX, pyCX);
 		}    
 	}
@@ -617,7 +690,7 @@ window.onload = function(){
 	function moneyText(){
 		//余额和投注钱数文本绘制
 		cxt_sgl.fillStyle = "#fff";
-	    cxt_sgl.font = "1.2rem Microsoft YaHei";
+	    cxt_sgl.font = "1.2em Microsoft YaHei";
 	    cxt_sgl.textAlign = 'start';
 	    cxt_sgl.textBaseline = 'top';
 	    
@@ -627,16 +700,16 @@ window.onload = function(){
 
 		var bettxt="下注：";
 	    var bettxtW=cxt_sgl.measureText(bettxt+"2000").width;
-	    cxt_sgl.clearRect(bettxtX, bettxtY, bettxtW, 30);
+	    cxt_sgl.clearRect(bettxtX, bettxtY-1, bettxtW, 30);
 	    cxt_sgl.fillText(bettxt + gameM.bet, bettxtX, bettxtY);
 
 	    var reMtxt="余额：";
 	    var reMtxtW=cxt_sgl.measureText(reMtxt+"2000").width;
-	    cxt_sgl.clearRect(reMX, reMY, reMtxtW, 30);
+	    cxt_sgl.clearRect(reMX, reMY-1, reMtxtW, 30);
 	    cxt_sgl.fillText(reMtxt + gameM.re, reMX, reMY);
 	    var gmTmtxt="游戏次数：";
 	    var gmTmtxtW=cxt_sgl.measureText(gmTmtxt+"2000").width;
-	    cxt_sgl.clearRect(gmTmX, gmTmY, gmTmtxtW, 30);
+	    cxt_sgl.clearRect(gmTmX, gmTmY-1, gmTmtxtW, 30);
 	    cxt_sgl.fillText(gmTmtxt + gameM.time, gmTmX, gmTmY);
 	}
 	
