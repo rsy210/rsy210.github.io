@@ -10,8 +10,6 @@ textarea{resize:none;}
 .clearfix { *zoom:1;clear: both; } 
 
 #canvas{
-	width: 500px;
-	height: 500px;
 	border:1px solid #000;
-	margin-left: 50%;
+	margin: 5px;
 }

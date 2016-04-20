@@ -59,7 +59,9 @@ textarea{resize:none;}
 #modules button.mul_game_bt{
 	cursor:not-allowed;
 }
-
+#modules button.mul_game_bt:hover{
+	cursor:not-allowed;
+}
 .help{
 	width: 5em;height: 5em;
 	position: absolute;
