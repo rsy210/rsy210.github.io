@@ -4,15 +4,14 @@
 	var cav = (function(){
 		var canvas = document.getElementById("canvas");
 		var cxt = canvas.getContext("2d");
-		var width = /*window.screen.availHeight ||*/ window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+		var width = window.screen.availHeight || window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 		var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-		//var dpi = window.devicePixelRatio;
+
 
 		canvas.width = 600;
 		canvas.height = height;
-		alert(width);
+		
 		if (width<600) {
-			alert(width);
 			canvas.width = width;
 		}
 		
@@ -90,13 +89,12 @@
 		var map = new Array();
 		var lenX = parseInt(cav.cW/cav.gap);
 		var lenY = parseInt(cav.cH/cav.gap);
-		for (var i = 0; i < lenX; i++) {
+		for (var i = 0; i <= lenX; i++) {
 			map[i] = new Array();
-			for (var j = 0; j < lenX; j++) {
+			for (var j = 0; j <= lenY; j++) {
 				map[i][j] = 1;
 			}
 		}
-
 		return{
 			
 			set : function(i,j,v){
@@ -122,7 +120,6 @@
 		return{
 			setTime : function(time){
 				time.time = time;
-				console.log(time.time);
 			},
 			getTime : function(){
 				return {
@@ -235,7 +232,6 @@
 			this.setR = function() {
 				
 				var self = this;
-				//console.log(result);
 				
 				if (i<rl) {
 					gmObj.set(cav.gap*result[i].x,cav.gap*result[i].y);
