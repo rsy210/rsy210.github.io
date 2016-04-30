@@ -4,15 +4,15 @@
 	var cav = (function(){
 		var canvas = document.getElementById("canvas");
 		var cxt = canvas.getContext("2d");
-		var width = window.screen.availHeight || window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+		var width = /*window.screen.availHeight ||*/ window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 		var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-		var dpi = window.devicePixelRatio;
+		//var dpi = window.devicePixelRatio;
 
 		canvas.width = 600;
 		canvas.height = height;
 		
 		if (width<600) {
-			canvas.width = width/dpi;
+			canvas.width = width;
 		}
 		
 		var cavW = canvas.width;
