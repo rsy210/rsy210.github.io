@@ -1,0 +1,22 @@
+body,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,p,input,select,textarea,form,button,figure{margin: 0; padding: 0;}
+html,body{font:normal 100% "Microsoft YaHei", Arial, Helvetica, Georgia, 'New York', serif;height:100%;font-weight: normal;}
+button,img,button{border:none;}
+ul{list-style:none;margin:0px;padding:0px;border:none;}
+/*input,select,textarea{outline:none;border:none;background:none;}*/
+/*input{background-color:#FFFFFF;}*/
+textarea{resize:none;}
+/*清除浮动*/
+.clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; } 
+.clearfix { *zoom:1;clear: both; } 
+
+body{
+	width: 100%;
+}
+#canvas{
+	display:block; 
+	/*width:36em;
+	height: 99.6%;*/
+	margin:0 auto;
+	background: #FFE6CD;
+}
+
