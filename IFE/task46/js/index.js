@@ -10,8 +10,9 @@
 
 		canvas.width = 600;
 		canvas.height = height;
-		
+		alert(width);
 		if (width<600) {
+			alert(width);
 			canvas.width = width;
 		}
 		
