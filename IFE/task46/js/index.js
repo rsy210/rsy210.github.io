@@ -89,9 +89,10 @@
 		var map = new Array();
 		var lenX = parseInt(cav.cW/cav.gap);
 		var lenY = parseInt(cav.cH/cav.gap);
-		for (var i = 0; i <= lenX; i++) {
+
+		for (var i = 0; i < lenY; i++) {
 			map[i] = new Array();
-			for (var j = 0; j <= lenY; j++) {
+			for (var j = 0; j < lenX; j++) {
 				map[i][j] = 1;
 			}
 		}
@@ -151,7 +152,7 @@
 
 				for (var i = x/cav.gap; i < x/cav.gap + w/cav.gap; i++) {
 					for (var j = y/cav.gap; j < y/cav.gap + h/cav.gap; j++) {
-						mapObj.set(i,j,0);
+						mapObj.set(j,i,0);
 					}
 				}
 				
@@ -170,13 +171,11 @@
 			var rl = map[i].length;
 				for (var j = 0; j < rl; j++) {
 					if(map[i][j] === 0){
-						cav.cxt.clearRect(i*cav.gap,j*cav.gap,cav.gap,cav.gap);
+						cav.cxt.clearRect(j*cav.gap,i*cav.gap,cav.gap,cav.gap);
 						mapObj.set(i,j,1);
 					}
 				};
 			};	
-
-			
 		
 		}
 
@@ -199,8 +198,8 @@
 			var astar = astar.astar;
 			var maps = new Map(mapObj.map());
 			var cx = curX/cav.gap,cy=curY/cav.gap;
-			var start = maps.maps[cx][cy];
-	    	var end = maps.maps[x/cav.gap][y/cav.gap];
+			var start = maps.maps[cy][cx];
+	    	var end = maps.maps[y/cav.gap][x/cav.gap];
 			var result = astar.path(maps, start, end);
 			if (result === undefined) {
 				time = 1;
@@ -234,7 +233,7 @@
 				var self = this;
 				
 				if (i<rl) {
-					gmObj.set(cav.gap*result[i].x,cav.gap*result[i].y);
+					gmObj.set(cav.gap*result[i].y,cav.gap*result[i].x);
 					i++;
 				
 					t=window.setTimeout(function(){self.setR();},50)
