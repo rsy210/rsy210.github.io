@@ -1,12 +1,9 @@
-
-
-　　　　	//cav对象
-	var cav = (function(){
+　	var cav = (function(){
+		//cav对象
 		var canvas = document.getElementById("canvas");
 		var cxt = canvas.getContext("2d");
-		var width = /*window.screen.availHeight ||*/ window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+		var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 		var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-
 
 		canvas.width = 600;
 		canvas.height = height;
@@ -65,6 +62,7 @@
 	})(cav);
 
 	var glObj = (function(cav){
+		//目标对象
 		var x = cav.cW/2, y = parseInt((cav.cH - 30)/cav.gap)*cav.gap;
 		var w = cav.gap, h = cav.gap;
 		cav.cxt.fillStyle = "blue";
@@ -86,6 +84,7 @@
 	})(cav);
 
 	var mapObj = (function(cav){
+		//地图坐标对象
 		var map = new Array();
 		var lenX = parseInt(cav.cW/cav.gap);
 		var lenY = parseInt(cav.cH/cav.gap);
@@ -176,14 +175,13 @@
 					}
 				};
 			};	
-		
 		}
-
 	})(cav);
 	
 
 	var time = 1;
 	cav.cv.addEventListener('click',function(e){
+		//检测点击函数
 		var e = e || window.event;
 		var target = e.target || e.srcElement;
 		var x = e.clientX - cav.cv.offsetLeft;
@@ -194,6 +192,7 @@
 		var curX = gmObj.get().curX, curY = gmObj.get().curY;
 
 		require(['astar'], function (astar){
+			//引入astar模块
 			var Map = astar.Map;
 			var astar = astar.astar;
 			var maps = new Map(mapObj.map());
@@ -201,47 +200,46 @@
 			var start = maps.maps[cy][cx];
 	    	var end = maps.maps[y/cav.gap][x/cav.gap];
 			var result = astar.path(maps, start, end);
+
 			if (result === undefined) {
 				time = 1;
 				blockObj.clear();
 				blockObj.set(time);
 			}
-			var o = new pathObj(result,function(){
-				if (glObj.get().x===x&&glObj.get().y===y) {
-					gmObj.init();
-					glObj.init();
-					
-					time++;
-					blockObj.clear();
-					blockObj.set(time);
-				}
-			});
+			var o = new pathObj(result);
 			o.setR();
-
 		
-		
-});
-		
-		
-		//var o = new pathObj1();
+		});
 		function pathObj(result,callback){
+			//绘制路径过程
 			var i =0;
 			var result = result;
 			var rl = result.length;
+			var x;
+			var y;
 			this.setR = function() {
 				
 				var self = this;
 				
 				if (i<rl) {
-					gmObj.set(cav.gap*result[i].y,cav.gap*result[i].x);
-					i++;
-				
-					t=window.setTimeout(function(){self.setR();},50)
-					
-				}else{
-					
+					x = cav.gap*result[i].y;
+					y = cav.gap*result[i].x;
+					gmObj.set(x, y);
+					if (glObj.get().x===x&&glObj.get().y===y) {
+						window.setTimeout(function(){gmObj.init();
+						glObj.init();
+						
+						time++;
+						blockObj.clear();
+						blockObj.set(time);},500);
+						
+
+					}else{
+						i++;
+						t=window.setTimeout(function(){self.setR();},50);
+					}	
+				}else{	
 					clearTimeout(t);
-					if(typeof callback == "function") {  callback(); } 
 				}
 				
 			}
