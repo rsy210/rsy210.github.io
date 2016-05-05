@@ -63,7 +63,7 @@
 
 	var glObj = (function(cav){
 		//目标对象
-		var x = cav.cW/2, y = parseInt((cav.cH - 30)/cav.gap)*cav.gap;
+		var x = cvtGap(cav.cW/2)*cav.gap, y = parseInt((cav.cH - 30)/cav.gap)*cav.gap;
 		var w = cav.gap, h = cav.gap;
 		cav.cxt.fillStyle = "blue";
 		cav.cxt.fillRect(x,y,w,h);
@@ -75,7 +75,7 @@
 				}
 			},
 			init : function(){
-				x = cav.cW/2, y = parseInt((cav.cH - 30)/cav.gap)*cav.gap;
+				x = cvtGap(cav.cW/2)*cav.gap, y = parseInt((cav.cH - 30)/cav.gap)*cav.gap;
 				w = cav.gap, h = cav.gap;
 				cav.cxt.fillStyle = "blue";
 				cav.cxt.fillRect(x,y,w,h);
@@ -188,8 +188,9 @@
 		var y = e.clientY - cav.cv.offsetTop;
 		x = parseInt(x/cav.gap)*cav.gap;
 		y = parseInt(y/cav.gap)*cav.gap;
-
-		if (mapObj.get(parseInt(x/cav.gap),parseInt(y/cav.gap) !== 0)) {
+		//console.log(mapObj.map());
+		//console.log(mapObj.get(parseInt(y/cav.gap),parseInt(x/cav.gap)));
+		if (mapObj.get(parseInt(y/cav.gap),parseInt(x/cav.gap)) === 0) {
 			return;
 		}
 		
@@ -200,18 +201,19 @@
 			var Map = astar.Map;
 			var astar = astar.astar;
 			var maps = new Map(mapObj.map());
-			var cx = curX/cav.gap,cy=curY/cav.gap;
+			var cx = cvtGap(curX),cy=cvtGap(curY);
 			var start = maps.maps[cy][cx];
-	    	var end = maps.maps[y/cav.gap][x/cav.gap];
+	    	var end = maps.maps[cvtGap(y)][cvtGap(x)];
 			var result = astar.path(maps, start, end);
 
 			if (result === undefined) {
 				time = 1;
 				blockObj.clear();
 				blockObj.set(time);
-			}
-			var o = new pathObj(result);
-			o.setR();
+			}else{
+				var o = new pathObj(result);
+				o.setR();
+			}	
 		
 		});
 		function pathObj(result,callback){
@@ -251,3 +253,8 @@
 		
 		
 	},true);
+
+	
+	function cvtGap(x){
+		return parseInt(x/cav.gap);
+	}
