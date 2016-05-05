@@ -188,28 +188,32 @@
 		var y = e.clientY - cav.cv.offsetTop;
 		x = parseInt(x/cav.gap)*cav.gap;
 		y = parseInt(y/cav.gap)*cav.gap;
-		
-		var curX = gmObj.get().curX, curY = gmObj.get().curY;
 
-		require(['astar'], function (astar){
-			//引入astar模块
-			var Map = astar.Map;
-			var astar = astar.astar;
-			var maps = new Map(mapObj.map());
-			var cx = curX/cav.gap,cy=curY/cav.gap;
-			var start = maps.maps[cy][cx];
-	    	var end = maps.maps[y/cav.gap][x/cav.gap];
-			var result = astar.path(maps, start, end);
+		if (mapObj.get(parseInt(x/cav.gap),parseInt(y/cav.gap) !== 0)) {
+			var curX = gmObj.get().curX, curY = gmObj.get().curY;
 
-			if (result === undefined) {
-				time = 1;
-				blockObj.clear();
-				blockObj.set(time);
-			}
-			var o = new pathObj(result);
-			o.setR();
+			require(['astar'], function (astar){
+				//引入astar模块
+				var Map = astar.Map;
+				var astar = astar.astar;
+				var maps = new Map(mapObj.map());
+				var cx = curX/cav.gap,cy=curY/cav.gap;
+				var start = maps.maps[cy][cx];
+		    	var end = maps.maps[y/cav.gap][x/cav.gap];
+				var result = astar.path(maps, start, end);
+
+				if (result === undefined) {
+					time = 1;
+					blockObj.clear();
+					blockObj.set(time);
+				}
+				var o = new pathObj(result);
+				o.setR();
+			
+			});
+		}
 		
-		});
+		
 		function pathObj(result,callback){
 			//绘制路径过程
 			var i =0;
