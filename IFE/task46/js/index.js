@@ -28,7 +28,7 @@
 		//游戏对象
 
 		//游戏对象初始位置
-		var x = cav.cW/2, y = 20;
+		var x = cvtGap(cav.cW/2)*20, y = 20;
 		var w = cav.gap, h = cav.gap;
 
 		cav.cxt.fillStyle = "red";
@@ -52,7 +52,7 @@
 				}
 			},
 			init : function(){
-				x = cav.cW/2, y = 20;
+				x = cvtGap(cav.cW/2)*20, y = 20;
 				w = cav.gap, h = cav.gap;
 
 				cav.cxt.fillStyle = "red";
