@@ -36,10 +36,9 @@ function loadFile(method,url,args){
 
 	var img = document.getElementById("img");
  	
-  loadFile('GET','Koala.jpg').then(function(response) {
-    var imageURL = window.URL.createObjectURL(response);
-    img.src = imageURL;
-    console.log(img);
-      }, function(Error) {
-    console.log(Error);
+	loadFile('GET','Koala.jpg').then(function(response) {
+    		var imageURL = window.URL.createObjectURL(response);
+    		img.src = imageURL;
+    	}, function(Error) {
+    		console.log(Error);
   });
