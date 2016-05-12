@@ -1,7 +1,8 @@
 'use strict'
 
 function loadFile(method,url,args){
-	var promise = new Promise(function(resolve, reject){
+	
+	return new Promise(function(resolve, reject){
 		var xhr;
 		if (window.XMLHttpRequest) {
 			xhr = new XMLHttpRequest();
@@ -31,7 +32,6 @@ function loadFile(method,url,args){
 		xhr.send();
 	});
 
-	return promise;
 }
 
 	var img = document.getElementById("img");
