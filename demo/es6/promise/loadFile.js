@@ -36,7 +36,7 @@ function loadFile(method,url,args){
 
 var img = document.getElementById("img");
  
-  loadFile('POST','Koala.jpg').then(function(response) {
+  loadFile('GET','Koala.jpg').then(function(response) {
     // The first runs when the promise resolves, with the request.reponse
     // specified within the resolve() method.
     var imageURL = window.URL.createObjectURL(response);
