@@ -37,13 +37,8 @@ function loadFile(method,url,args){
 var img = document.getElementById("img");
  
   loadFile('GET','Koala.jpg').then(function(response) {
-    // The first runs when the promise resolves, with the request.reponse
-    // specified within the resolve() method.
     var imageURL = window.URL.createObjectURL(response);
-    myImage.src = imageURL;
-    body.appendChild(myImage);
-    // The second runs when the promise
-    // is rejected, and logs the Error specified with the reject() method.
-  }, function(Error) {
+    img.src = imageURL;
+      }, function(Error) {
     console.log(Error);
   });
