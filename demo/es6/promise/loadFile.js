@@ -34,8 +34,8 @@ function loadFile(method,url,args){
 	return promise;
 }
 
-var img = document.getElementById("img");
- 
+	var img = document.getElementById("img");
+ 	console.log(img);
   loadFile('GET','Koala.jpg').then(function(response) {
     var imageURL = window.URL.createObjectURL(response);
     img.src = imageURL;
