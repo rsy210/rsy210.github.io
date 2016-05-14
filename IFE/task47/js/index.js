@@ -486,6 +486,7 @@ function animate() {
 						glObj.init();
 						
 						time =0;
+						gmObj.setLv(true);
 						blockObj.clear();
 						guardObj.clearAll();
 						
@@ -568,6 +569,7 @@ function animate() {
 						glObj.init();
 						
 						time++;
+						gmObj.setLv(true);
 						blockObj.clear();
 						guardObj.clearAll();
 						
