@@ -489,6 +489,7 @@ function animate() {
 						blockObj.set(time);
 						guardObj.set(time);
 						redraw();
+						animate();
 						},500);
 		}
 
