@@ -493,7 +493,7 @@ function animate() {
 		}
 
 }
-	//animate();
+	animate();
 	cav.cv.addEventListener('click',function(e){
 		//检测点击函数
 		var e = e || window.event;
