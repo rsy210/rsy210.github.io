@@ -480,8 +480,19 @@ function animate() {
 		gmObj.bullet.animate();
 		guardObj.bullet();
 		if (!gmObj.getLv()) {
-			alert("t");
-			
+			window.cancelAnimationFrame(id);
+			window.setTimeout(function(){
+						gmObj.init();
+						glObj.init();
+						
+						time =0;
+						blockObj.clear();
+						guardObj.clearAll();
+						
+						blockObj.set(time);
+						guardObj.set(time);
+						redraw();
+						},500);
 		}
 
 }
