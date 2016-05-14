@@ -302,14 +302,7 @@
 			redraw : function(){
 				animate(s.x,s.y,e.x,e.y);
 			},
-			bullet : function(){
-				num++;
-				/*if (num>2) {
-					num = 0;
-					bulletPool.get(s.x+10, s.y+10, 3,e.x+10,e.y+10,"guard");
-				}*/
-				return bulletPool.animate();
-			}
+			bullet :  bulletPool
 		}
 		function fire(x,y,x1,y1){
 				s.x = x;
@@ -321,7 +314,7 @@
 				if (t1 != undefined) {
 					clearTimeout(t1);
 				}
-				
+				animate();
 				//animate(s.x,s.y,e.x,e.y);
 			}
 		/*function animate() {
@@ -337,7 +330,7 @@
 		 	
 			t1=setTimeout(animate, 1000/60 );
 		}*/
-				function generategGuard(time){
+		function generategGuard(time){
 			time = time;
 			var r = cav.gap/2, h = cav.gap;
 			var ken = r*5;
@@ -478,17 +471,20 @@ function animate() {
 	guardObj.draw();
 
 		gmObj.bullet.animate();
-		guardObj.bullet();
+		guardObj.bullet.animate();
 		if (!gmObj.getLv()) {
 			window.cancelAnimationFrame(id);
 			window.setTimeout(function(){
+				
 						gmObj.init();
 						glObj.init();
 						
-						time =0;
+						time =1;
 						gmObj.setLv(true);
 						blockObj.clear();
 						guardObj.clearAll();
+						gmObj.bullet.clear();
+						guardObj.bullet.clear();
 						
 						blockObj.set(time);
 						guardObj.set(time);
@@ -497,7 +493,7 @@ function animate() {
 		}
 
 }
-	animate();
+	//animate();
 	cav.cv.addEventListener('click',function(e){
 		//检测点击函数
 		var e = e || window.event;
@@ -684,15 +680,15 @@ Bullet.prototype.draw = function(cav) {
 		this.f = 2;
 		if (this.yf < 0) {
 			//l等于0时，y值相同，增量为0
-			this.y -= this.l===0 ? 0 : this.r;
+			this.y -= this.l===0 ? 0 : this.sp;
 		}else{
-			this.y += this.l===0 ? 0 : this.r;;
+			this.y += this.l===0 ? 0 : this.sp;;
 		}
 		if (this.xf<0) {
-			this.x -= this.l===0 ? this.r : this.r/this.l;
+			this.x -= this.l===0 ? this.sp : this.sp/this.l;
 		}else{
 			//对x值相同情况，l为无穷大，x增量为0，因此未做判断
-			this.x += this.l===0 ? this.r : this.r/this.l;
+			this.x += this.l===0 ? this.sp : this.sp/this.l;
 		}
 	}
 	
@@ -741,6 +737,7 @@ Bullet.prototype.clear = function() {
 	this.y = 0;
 	this.sp = 0;
 	this.alive = false; 
+	this.end = false;
 };
 
 function Pool(maxsize){
@@ -766,6 +763,10 @@ function Pool(maxsize){
 		for (var i = 0; i < size; i++) {
 			if (pool[i].alive) {
 				if (pool[i].draw(cav)) {
+					pool[i].clear();
+					pool.push((pool.splice(i,1))[0]);
+					i--;
+				}else if (pool[i].end === true) {
 					pool[i].clear();
 					pool.push((pool.splice(i,1))[0]);
 					i--;
