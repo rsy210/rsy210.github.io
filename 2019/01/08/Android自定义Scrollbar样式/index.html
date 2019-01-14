@@ -96,20 +96,24 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="R Note">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="最近有个需求其滚动条样式类似淘宝频道栏的滚动条，需要修改滚动条的样式，因此对View的scrollbar做了总结。 scrollbar的属性如下：    属性 描述     android:scrollbars 是否显示滚动条。none:不显示，horizontal:水平方向，vertical:垂直方向   android:scrollbarStyle 滚动条风格和样式。insideOverlay">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android自定义Scrollbar样式">
+<meta property="og:url" content="http://yoursite.com/2019/01/08/Android自定义Scrollbar样式/index.html">
 <meta property="og:site_name" content="R Note">
+<meta property="og:description" content="最近有个需求其滚动条样式类似淘宝频道栏的滚动条，需要修改滚动条的样式，因此对View的scrollbar做了总结。 scrollbar的属性如下：    属性 描述     android:scrollbars 是否显示滚动条。none:不显示，horizontal:水平方向，vertical:垂直方向   android:scrollbarStyle 滚动条风格和样式。insideOverlay">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-01-14T03:31:24.022Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="R Note">
+<meta name="twitter:title" content="Android自定义Scrollbar样式">
+<meta name="twitter:description" content="最近有个需求其滚动条样式类似淘宝频道栏的滚动条，需要修改滚动条的样式，因此对View的scrollbar做了总结。 scrollbar的属性如下：    属性 描述     android:scrollbars 是否显示滚动条。none:不显示，horizontal:水平方向，vertical:垂直方向   android:scrollbarStyle 滚动条风格和样式。insideOverlay">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/08/Android自定义Scrollbar样式/">
 
 
 
@@ -119,7 +123,7 @@
   };
 </script>
 
-  <title>R Note</title>
+  <title>Android自定义Scrollbar样式 | R Note</title>
   
 
 
@@ -167,8 +171,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -264,9 +267,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -298,10 +301,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/08/Android自定义Scrollbar样式/" class="post-title-link" itemprop="url">Android自定义Scrollbar样式</a>
+          <h1 class="post-title" itemprop="name headline">Android自定义Scrollbar样式
+
               
             
           </h1>
@@ -376,9 +377,7 @@
       
 
       
-        
-          
-            <p>最近有个需求其滚动条样式类似淘宝频道栏的滚动条，需要修改滚动条的样式，因此对View的scrollbar做了总结。</p>
+        <p>最近有个需求其滚动条样式类似淘宝频道栏的滚动条，需要修改滚动条的样式，因此对View的scrollbar做了总结。</p>
 <p>scrollbar的属性如下：</p>
 <table>
 <thead>
@@ -429,8 +428,6 @@
 <p>可知computeHorizontalScrollRange(),computeHorizontalScrollOffset(),computeHorizontalScrollExtent()三项的值通过LayoutManager计算，通过查看LinearLayoutManager中这三个方法代码逻辑可知，这三个方法是计算所有item的长度，移动范围；由此可知滚动条的移动计算是根据RecyclerView中所有Item项的移动比例计算的，因此只要自定义LinearLayoutManager，并做如下修改即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public class CustomLinearLayoutManager extends LinearLayoutManager &#123;</span><br><span class="line">    private int viewW;// recyclerView 宽</span><br><span class="line">    private int trackW;// 滚动条背景宽</span><br><span class="line">    private int thumbW;// 滚动条滑块宽</span><br><span class="line">    public ScrollbarLinearLayoutManager(Context context) &#123;</span><br><span class="line">        super(context);</span><br><span class="line">    &#125;</span><br><span class="line">    public ScrollbarLinearLayoutManager(Context context, int orientation, boolean reverseLayout) &#123;</span><br><span class="line">        super(context, orientation, reverseLayout);</span><br><span class="line">    &#125;</span><br><span class="line">    public ScrollbarLinearLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) &#123;</span><br><span class="line">        super(context, attrs, defStyleAttr, defStyleRes);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setParams(int viewW, int trackW, int thumbW) &#123;</span><br><span class="line">        this.viewW = viewW;</span><br><span class="line">        this.trackW = trackW;</span><br><span class="line">        this.thumbW = thumbW;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int computeHorizontalScrollOffset(RecyclerView.State state) &#123;</span><br><span class="line">        return isCustomScrollbar() ? (int) ((float) super.computeHorizontalScrollOffset(state) / (super</span><br><span class="line">                .computeHorizontalScrollRange(state) - super.computeHorizontalScrollExtent(state)) * (trackW - thumbW)) :</span><br><span class="line">                super.computeHorizontalScrollOffset(state);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int computeHorizontalScrollExtent(RecyclerView.State state) &#123;</span><br><span class="line">        return isCustomScrollbar() ? thumbW : super.computeHorizontalScrollExtent(state);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int computeHorizontalScrollRange(RecyclerView.State state) &#123;</span><br><span class="line">        return isCustomScrollbar() ? viewW : super.computeHorizontalScrollRange(state);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private boolean isCustomScrollbar() &#123;</span><br><span class="line">        return viewW &gt; 0 &amp;&amp; trackW &gt; 0 &amp;&amp; thumbW &gt; 0 &amp;&amp; viewW &gt; trackW &amp;&amp; trackW &gt; thumbW;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>即computeHorizontalScrollRange结果为RecyclerView的宽，computeHorizontalScrollExtent为实际滑块的宽，computeHorizontalScrollOffset为super.Offset/(super.Range-super.Extent) 再 乘以 (trackW - thumbW),即实际偏移值，最终效果如下图，滚动条滑块限制在实际背景范围内滑动。</p>
 
-          
-        
       
     </div>
 
@@ -453,12 +450,12 @@
       
 
       
+      
+      
 
       
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -468,14 +465,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -663,6 +661,10 @@
   
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
@@ -672,6 +674,8 @@
 
 
   
+  
+
 
 
 
