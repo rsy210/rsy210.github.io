@@ -343,7 +343,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-09-24 19:44:18" itemprop="dateModified" datetime="2019-09-24T19:44:18+08:00">2019-09-24</time>
+                <time title="修改时间：2019-09-24 20:06:04" itemprop="dateModified" datetime="2019-09-24T20:06:04+08:00">2019-09-24</time>
               
             
           </span>
@@ -380,29 +380,26 @@
           
             <p>图片资源往往占据apk大小的很大一部分，对图片压缩工具进行总结</p>
 <h1 id="一、TinyPNG压缩图片"><a href="#一、TinyPNG压缩图片" class="headerlink" title="一、TinyPNG压缩图片"></a>一、TinyPNG压缩图片</h1><p> <a href="https://tinypng.com/" target="_blank" rel="noopener">TinyPNG</a>使用智能无损压缩技术来减小图片文件的大小，支持JPG、PNG、.9图和WEBP。TinyPNG通过有选择地减少图像中的颜色数量，从而减少存储数据所需的字节。</p>
-<p> (1) 在线压缩<br>     网址：<a href="https://tinypng.com/" target="_blank" rel="noopener">https://tinypng.com/</a><br>     如图，一次最多上传20张，每张最大不超过5M，<br>     <img src="/.com//tinypng.png" alt="上传"><br>     压缩后，可以看到压缩前后大小，以及压缩比例<br>    <img src="/.com//tinypng_up.png" alt="压缩完成"><br>    可以看到全部图片压缩比例大小，下载后替换原图片文件即可<br>    <img src="/.com//tinypng_download.png" alt="压缩完成"></p>
+<p> (1) 在线压缩<br>     网址：<a href="https://tinypng.com/" target="_blank" rel="noopener">https://tinypng.com/</a><br>     如图，一次最多上传20张，每张最大不超过5M，</p>
+<p><img src="/2019/08/30/Android-Apk瘦身-压缩图片/tinypng.png" alt="上传"></p>
+<p>压缩后，可以看到压缩前后大小，以及压缩比例</p>
+<p><img src="/2019/08/30/Android-Apk瘦身-压缩图片/tinypng_up.png" alt="压缩完成"><br>可以看到全部图片压缩比例大小，下载后替换原图片文件即可<br><img src="/2019/08/30/Android-Apk瘦身-压缩图片/tinypng_download.png" alt="压缩完成"></p>
 <pre><code>优点：
 - 压缩上传方便快捷
 - 免费无总张数限制
 缺点：
 - 一次只能上传20张
 - 需要自己下载并去覆盖原文件
-</code></pre><p> (2) gradle插件<br>     用在线压缩的方式不够自动化，无法批量压缩图片，目前有不少第三方gradle插件，主要利用TinyPNG提供的<a href="https://tinypng.com/developers" target="_blank" rel="noopener">api key</a>，每个key每月最多可以压缩500张图片。<br>     如下两个第三方插件，可查看具体使用方式</p>
-<pre><code>- [https://github.com/waynell/TinyPngPlugin](https://github.com/waynell/TinyPngPlugin)
-- [https://github.com/android-notes/TinyPngPlugin](https://github.com/android-notes/TinyPngPlugin)
-优点：
+</code></pre><p> (2) gradle插件<br>     用在线压缩的方式不够自动化，无法批量压缩图片，目前有不少第三方gradle插件，主要利用TinyPNG提供的<a href="https://tinypng.com/developers" target="_blank" rel="noopener">api key</a>，每个key每月最多可以压缩500张图片。<br>如下两个第三方插件，可查看具体使用方式<br>    1.<a href="https://github.com/waynell/TinyPngPlugin" target="_blank" rel="noopener">https://github.com/waynell/TinyPngPlugin</a><br>    2.<a href="https://github.com/android-notes/TinyPngPlugin" target="_blank" rel="noopener">https://github.com/android-notes/TinyPngPlugin</a></p>
+<pre><code>优点：
 - 自动化，解放双手
 - 多种参数配置方式
 - 历史压缩记录
 缺点：
 - 需要代码中导入插件
 - 一个api一个月最多免费压缩500张图片
-</code></pre><h1 id="二、ImageOptim"><a href="#二、ImageOptim" class="headerlink" title="二、ImageOptim"></a>二、ImageOptim</h1><pre><code>mac端无损压缩图片软件，支持jpg,png,gif
-网址：[https://imageoptim.com/mac](https://imageoptim.com/mac)
-使用如图所示：
-![imageoptim](Android-Apk瘦身-压缩图片/imageoptim.png)
-直接将图片拖拽到窗口中，或通过+号添加图片，会自动对源文件进行压缩，右侧会显示压缩后大小和压缩比例，并且可以重复压缩
-</code></pre>
+</code></pre><h1 id="二、ImageOptim"><a href="#二、ImageOptim" class="headerlink" title="二、ImageOptim"></a>二、ImageOptim</h1><p>mac端无损压缩图片软件，支持jpg,png,gif<br>网址：<a href="https://imageoptim.com/mac" target="_blank" rel="noopener">https://imageoptim.com/mac</a><br>使用如图所示：<br><img src="/2019/08/30/Android-Apk瘦身-压缩图片/imageoptim.png" alt="imageoptim"><br>    直接将图片拖拽到窗口中，或通过+号添加图片，会自动对源文件进行压缩，右侧会显示压缩后大小和压缩比例，并且可以重复压缩</p>
+
           
         
       
